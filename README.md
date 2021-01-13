@@ -7,12 +7,12 @@ The goal of the project is to demonstrate modern tech-stack and take a fresh loo
 ## Stack
 
 * Kotlin
-* Coroutines/Flow
-* Compose
-* GraphQl/Appollo
-* Jetpack: Navigation, ViewModel
-* Kodein
-* Gradle Kotlin DSL
+* Coroutines/Flow (WIP)
+* Compose (WIP)
+* GraphQl/Appollo (WIP)
+* Jetpack: Navigation, ViewModel (WIP)
+* Kodein (WIP) or maybe Koin
+* Gradle Kotlin DSL (WIP)
 
 ## License
 ```
