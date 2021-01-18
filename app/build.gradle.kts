@@ -3,7 +3,6 @@ import java.util.*
 plugins {
     id(GradlePluginId.ANDROID_APPLICATION)
     kotlin(GradlePluginId.KOTLIN_ANDROID)
-    kotlin(GradlePluginId.KOTLIN_ANDROID_EXTENSIONS)
 }
 
 android {

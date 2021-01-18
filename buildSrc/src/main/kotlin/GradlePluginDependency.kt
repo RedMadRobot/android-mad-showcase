@@ -1,6 +1,6 @@
 
 object GradlePluginVersions {
-    const val ANDROID_GRADLE = "4.0.0"
+    const val ANDROID_GRADLE = "7.0.0-alpha04"
     const val KOTLIN = CoreVersions.KOTLIN
     const val APOLLO_GRAPHQL = CoreVersions.APOLLO
 }
