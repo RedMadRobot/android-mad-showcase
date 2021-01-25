@@ -1,13 +1,10 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    id("com.android.library")
+    id("kotlin-android")
 }
 
 android {
     defaultConfig {
-
-        applicationId = "com.redmadrobot.mad"
-
         minSdkVersion(AndroidConfigVersions.MIN_SDK_VERSION)
         targetSdkVersion(AndroidConfigVersions.TARGET_SDK_VERSION)
         compileSdkVersion(AndroidConfigVersions.COMPILE_SDK_VERSION)
@@ -35,17 +32,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:core_navigation"))
-
-    implementation(PresentationDependency.APPCOMPAT)
-    implementation(PresentationDependency.CONSTRAINT_LAYOUT)
-    implementation(PresentationDependency.MATERIAL_UI)
-
-    implementation(PresentationDependency.COMPOSE_UI)
-    implementation(PresentationDependency.COMPOSE_COMPILER)
-    implementation(PresentationDependency.COMPOSE_NAVIGATION)
-    implementation(PresentationDependency.COMPOSE_TOOLING)
-    implementation(PresentationDependency.COMPOSE_FOUNDATION)
+    implementation(CoreDependency.KOTLIN_STDLIB)
+    implementation(PresentationDependency.COMPOSE_RUNTIME)
     implementation(PresentationDependency.COMPOSE_FOUNDATION_LAYOUT)
-    implementation(PresentationDependency.COMPOSE_MATERIAL)
+    implementation(PresentationDependency.COMPOSE_TOOLING)
 }

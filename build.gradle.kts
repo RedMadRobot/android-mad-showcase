@@ -1,15 +1,23 @@
-plugins {
-    // pre-load plugins
-    id(GradlePluginId.ANDROID_APPLICATION) version GradlePluginVersions.ANDROID_GRADLE apply false
-    kotlin(GradlePluginId.KOTLIN_ANDROID) version GradlePluginVersions.KOTLIN apply false
-}
-
-// all projects = root project + sub projects
-allprojects {
+buildscript {
     repositories {
         google()
-        mavenCentral()
         jcenter()
-        maven { url = uri("https://jitpack.io") }
+        maven("https://dl.bintray.com/kotlin/kotlin-eap/")
     }
+    dependencies {
+        classpath(GradlePlugin.ANDROID_BUILD_TOOLS)
+        classpath(GradlePlugin.KOTLIN)
+    }
+}
+
+subprojects {
+    repositories {
+        google()
+        jcenter()
+        maven("https://dl.bintray.com/kotlin/kotlin-eap/")
+    }
+}
+
+task<Delete>("clean") {
+    delete(rootProject.buildDir)
 }

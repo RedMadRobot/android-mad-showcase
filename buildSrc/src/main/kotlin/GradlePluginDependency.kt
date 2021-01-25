@@ -1,14 +1,9 @@
-
 object GradlePluginVersions {
-    const val ANDROID_GRADLE = "7.0.0-alpha04"
+    const val ANDROID_BUILD_TOOLS = "7.0.0-alpha04"
     const val KOTLIN = CoreVersions.KOTLIN
-    const val APOLLO_GRAPHQL = CoreVersions.APOLLO
 }
 
-object GradlePluginId {
-    const val ANDROID_APPLICATION = "com.android.application"
-    const val KOTLIN_ANDROID = "android"
-    const val KOTLIN_ANDROID_EXTENSIONS = "android.extensions"
-
-    const val APOLLO_GRAPHQL = "com.apollographql.apollo"
+object GradlePlugin {
+    const val ANDROID_BUILD_TOOLS = "com.android.tools.build:gradle:${GradlePluginVersions.ANDROID_BUILD_TOOLS}"
+    const val KOTLIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:${GradlePluginVersions.KOTLIN}"
 }
