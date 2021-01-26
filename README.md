@@ -11,12 +11,13 @@ This repository uses Jetpack Compose. For the best experience developing with Je
 ## Stack
 
 * Kotlin
+* Compose
+* Compose Navigation
 * Coroutines/Flow (WIP)
-* Compose (WIP)
 * GraphQl/Appollo (WIP)
-* Jetpack: Navigation, ViewModel (WIP)
+* Jetpack ViewModel (WIP)
 * Kodein (WIP) or maybe Koin
-* Gradle Kotlin DSL (WIP)
+* Gradle Kotlin DSL
 
 ## License
 ```
