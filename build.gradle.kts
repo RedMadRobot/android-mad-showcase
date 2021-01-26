@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     repositories {
         google()
@@ -18,6 +20,6 @@ subprojects {
     }
 }
 
-task<Delete>("clean") {
+tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

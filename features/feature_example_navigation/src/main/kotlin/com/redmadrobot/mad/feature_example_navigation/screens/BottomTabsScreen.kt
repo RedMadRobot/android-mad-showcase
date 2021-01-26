@@ -1,4 +1,4 @@
-package com.redmadrobot.mad.examples
+package com.redmadrobot.mad.feature_example_navigation.screens
 
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
@@ -12,12 +12,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.redmadrobot.mad.SampleScreenRouter
 import com.redmadrobot.mad.core.navigation.BackStack
 import com.redmadrobot.mad.core.navigation.Router
-import com.redmadrobot.mad.examples.TabRoute.TabA
-import com.redmadrobot.mad.examples.TabRoute.TabB
-import com.redmadrobot.mad.examples.TabRoute.TabC
+import com.redmadrobot.mad.feature_example_navigation.screens.TabRoute.TabA
+import com.redmadrobot.mad.feature_example_navigation.screens.TabRoute.TabB
+import com.redmadrobot.mad.feature_example_navigation.screens.TabRoute.TabC
 
 @Composable
 fun BottomTabsScreen() {

@@ -1,4 +1,4 @@
-package com.redmadrobot.mad.examples
+package com.redmadrobot.mad.feature_example_navigation.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

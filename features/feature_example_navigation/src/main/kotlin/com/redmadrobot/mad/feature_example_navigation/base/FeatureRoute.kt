@@ -1,35 +1,35 @@
-package com.redmadrobot.mad
+package com.redmadrobot.mad.feature_example_navigation.base
 
-sealed class AppRoute {
-    object HomeRoute : AppRoute() {
+sealed class FeatureRoute {
+    object HomeRoute : FeatureRoute() {
         override fun toString(): String = "Home"
     }
 
-    object SimpleRoute : AppRoute() {
+    object SimpleRoute : FeatureRoute() {
         override fun toString(): String = "Simple"
     }
 
-    object MultipleStartRoute : AppRoute() {
+    object MultipleStartRoute : FeatureRoute() {
         override fun toString(): String = "Multiple start routes"
     }
 
-    object BottomTabsRoute : AppRoute() {
+    object BottomTabsRoute : FeatureRoute() {
         override fun toString(): String = "Bottom tabs"
     }
 
-    object SplitScreenRoute : AppRoute() {
+    object SplitScreenRoute : FeatureRoute() {
         override fun toString(): String = "Split screen"
     }
 
-    object ComplexRoute : AppRoute() {
+    object ComplexRoute : FeatureRoute() {
         override fun toString(): String = "Complex"
     }
 
-    object TranslucentRoute : AppRoute() {
+    object TranslucentRoute : FeatureRoute() {
         override fun toString(): String = "Translucent"
     }
 
-    object ResultRoute : AppRoute() {
+    object ResultRoute : FeatureRoute() {
         override fun toString(): String = "Result"
     }
 }

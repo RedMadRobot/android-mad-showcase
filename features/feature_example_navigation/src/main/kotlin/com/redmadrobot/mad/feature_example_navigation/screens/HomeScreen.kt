@@ -1,4 +1,4 @@
-package com.redmadrobot.mad
+package com.redmadrobot.mad.feature_example_navigation
 
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
@@ -9,16 +9,17 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.redmadrobot.mad.AppRoute.SimpleRoute
-import com.redmadrobot.mad.AppRoute.MultipleStartRoute
-import com.redmadrobot.mad.AppRoute.BottomTabsRoute
-import com.redmadrobot.mad.AppRoute.SplitScreenRoute
-import com.redmadrobot.mad.AppRoute.ComplexRoute
-import com.redmadrobot.mad.AppRoute.TranslucentRoute
-import com.redmadrobot.mad.AppRoute.ResultRoute
+import com.redmadrobot.mad.feature_example_navigation.base.FeatureRoute
+import com.redmadrobot.mad.feature_example_navigation.base.FeatureRoute.SimpleRoute
+import com.redmadrobot.mad.feature_example_navigation.base.FeatureRoute.MultipleStartRoute
+import com.redmadrobot.mad.feature_example_navigation.base.FeatureRoute.BottomTabsRoute
+import com.redmadrobot.mad.feature_example_navigation.base.FeatureRoute.SplitScreenRoute
+import com.redmadrobot.mad.feature_example_navigation.base.FeatureRoute.ComplexRoute
+import com.redmadrobot.mad.feature_example_navigation.base.FeatureRoute.TranslucentRoute
+import com.redmadrobot.mad.feature_example_navigation.base.FeatureRoute.ResultRoute
 
 @Composable
-fun HomeScreen(onShowSample: (AppRoute) -> Unit) {
+fun HomeScreen(onShowSample: (FeatureRoute) -> Unit) {
     val data = listOf(
         SimpleRoute,
         MultipleStartRoute,

@@ -1,4 +1,4 @@
-package com.redmadrobot.mad.examples
+package com.redmadrobot.mad.feature_example_navigation.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.redmadrobot.mad.core.navigation.Router
-import com.redmadrobot.mad.examples.ComplexRoute.HomeRoute
-import com.redmadrobot.mad.examples.ComplexRoute.SimpleRoute
-import com.redmadrobot.mad.examples.ComplexRoute.SplitRoute
+import com.redmadrobot.mad.feature_example_navigation.screens.ComplexRoute.HomeRoute
+import com.redmadrobot.mad.feature_example_navigation.screens.ComplexRoute.SimpleRoute
+import com.redmadrobot.mad.feature_example_navigation.screens.ComplexRoute.SplitRoute
 
 @Composable
 fun ComplexScreen() {
