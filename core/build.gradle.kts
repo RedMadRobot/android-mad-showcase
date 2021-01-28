@@ -4,5 +4,4 @@ plugins {
 }
 
 dependencies {
-    api(project(":core:core_navigation"))
 }

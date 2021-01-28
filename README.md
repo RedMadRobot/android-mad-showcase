@@ -11,8 +11,8 @@ This repository uses Jetpack Compose. For the best experience developing with Je
 ## Stack
 
 * Kotlin
-* Compose
-* Compose Navigation
+* Compose (WIP)
+* Compose Navigation (WIP)
 * Coroutines/Flow (WIP)
 * GraphQl/Appollo (WIP)
 * Jetpack ViewModel (WIP)

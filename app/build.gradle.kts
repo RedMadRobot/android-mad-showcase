@@ -10,9 +10,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:core_navigation"))
-    implementation(project(":features:feature_example_navigation"))
-
     implementation(PresentationDependency.APPCOMPAT)
     implementation(PresentationDependency.CONSTRAINT_LAYOUT)
     implementation(PresentationDependency.MATERIAL_UI)

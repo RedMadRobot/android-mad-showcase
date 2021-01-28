@@ -2,11 +2,9 @@ rootProject.name = ("android-mad-showcase")
 include(":app")
 
 include(
-    ":core",
-    ":core:core_navigation"
+    ":core"
 )
 
 include(
-    ":features",
-    ":features:feature_example_navigation"
+    ":features"
 )
