@@ -1,10 +1,18 @@
 object CoreVersions {
-    const val KOTLIN = "1.4.21"
+    const val KOTLIN = "1.4.31"
     const val COROUTINES = "1.4.2"
-    const val COMPOSE = "1.0.0-alpha10"
+
+    const val HILT = "2.33-beta"
 }
 
 object CoreDependency {
-    const val KOTLIN_STDLIB = "org.jetbrains.kotlin:kotlin-stdlib:${CoreVersions.KOTLIN}"
-    const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${CoreVersions.COROUTINES}"
+    const val KOTLIN = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${CoreVersions.KOTLIN}"
+
+    const val COROUTINES_CORE =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${CoreVersions.COROUTINES}"
+    const val COROUTINES_ANDROID =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${CoreVersions.COROUTINES}"
+
+    const val HILT = "com.google.dagger:hilt-android:${CoreVersions.HILT}"
+    const val HILT_COMPILER = "com.google.dagger:hilt-compiler:${CoreVersions.HILT}"
 }

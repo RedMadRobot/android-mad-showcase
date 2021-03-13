@@ -1,6 +1,7 @@
 plugins {
-    id("com.android.application")
-    id("common-android-config")
+    id(GradlePluginId.ANDROID_APPLICATION)
+    id(GradlePluginId.ANDROID_COMMON_CONFIG)
+    kotlin(GradlePluginId.KAPT)
 }
 
 android {
@@ -10,13 +11,7 @@ android {
 }
 
 dependencies {
-    implementation(PresentationDependency.APPCOMPAT)
-    implementation(PresentationDependency.CONSTRAINT_LAYOUT)
-    implementation(PresentationDependency.MATERIAL_UI)
+    implementation(project(":core:core"))
 
-    implementation(PresentationDependency.COMPOSE_UI)
-    implementation(PresentationDependency.COMPOSE_COMPILER)
-    implementation(PresentationDependency.COMPOSE_TOOLING)
-    implementation(PresentationDependency.COMPOSE_FOUNDATION)
-    implementation(PresentationDependency.COMPOSE_MATERIAL)
+    kapt(CoreDependency.HILT_COMPILER)
 }

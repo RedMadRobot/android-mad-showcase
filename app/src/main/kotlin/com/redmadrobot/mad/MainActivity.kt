@@ -2,9 +2,10 @@ package com.redmadrobot.mad
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun Content() {
         AppTheme {
-           Text("hello")
+           Text("hello", color = Color.White)
         }
     }
 }

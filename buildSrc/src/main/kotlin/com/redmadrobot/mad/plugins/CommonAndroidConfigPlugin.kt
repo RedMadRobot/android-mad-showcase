@@ -1,6 +1,5 @@
 package com.redmadrobot.mad.plugins
 
-import AndroidConfigVersions
 import CoreVersions
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -27,10 +26,9 @@ class CommonAndroidConfigPlugin : Plugin<Project> {
     private fun Project.applyAndroidConfig() {
         android?.run {
             defaultConfig {
-                minSdkVersion(AndroidConfigVersions.MIN_SDK_VERSION)
-                targetSdkVersion(AndroidConfigVersions.TARGET_SDK_VERSION)
-                compileSdkVersion(AndroidConfigVersions.COMPILE_SDK_VERSION)
-                buildToolsVersion(AndroidConfigVersions.BUILD_TOOLS_VERSION)
+                minSdkVersion(AndroidConfig.MIN_SDK_VERSION)
+                targetSdkVersion(AndroidConfig.TARGET_SDK_VERSION)
+                compileSdkVersion(AndroidConfig.COMPILE_SDK_VERSION)
             }
 
             compileOptions {
@@ -39,18 +37,46 @@ class CommonAndroidConfigPlugin : Plugin<Project> {
             }
 
             composeOptions {
-                kotlinCompilerVersion = CoreVersions.KOTLIN
-                kotlinCompilerExtensionVersion = CoreVersions.COMPOSE
+                kotlinCompilerExtensionVersion = PresentationVersions.COMPOSE
             }
 
             sourceSets.forEach { it.java.srcDir("src/${it.name}/kotlin") }
         }
         app?.run {
+            buildTypes {
+                val proguardFiles = rootProject.fileTree("proguard").files +
+                        getDefaultProguardFile("proguard-android-optimize.txt")
+
+                getByName(BuildType.DEBUG) {
+                }
+
+                getByName(BuildType.RELEASE) {
+                    isDebuggable = false
+                    isMinifyEnabled = true
+                    isShrinkResources = true
+                    proguardFiles(*proguardFiles.toTypedArray())
+                }
+            }
+
             buildFeatures {
                 compose = true
             }
         }
         library?.run {
+            buildTypes {
+                val proguardFiles = rootProject.fileTree("proguard").files +
+                        getDefaultProguardFile("proguard-android-optimize.txt")
+
+                getByName(BuildType.DEBUG) {
+                }
+
+                getByName(BuildType.RELEASE) {
+                    isDebuggable = false
+                    isMinifyEnabled = true
+                    proguardFiles(*proguardFiles.toTypedArray())
+                }
+            }
+
             buildFeatures {
                 compose = true
             }
