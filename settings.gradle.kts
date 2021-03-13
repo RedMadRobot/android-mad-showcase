@@ -7,5 +7,7 @@ include(
 )
 
 include(
+    ":features:auth",
+    ":features:home"
 )
 

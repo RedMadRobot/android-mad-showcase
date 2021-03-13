@@ -4,5 +4,13 @@ plugins {
 }
 
 dependencies {
-    implementation(PresentationDependency.APPCOMPAT)
+    api(PresentationDependency.APPCOMPAT)
+    api(PresentationDependency.COMPOSE_UI)
+    api(PresentationDependency.COMPOSE_COMPILER)
+    api(PresentationDependency.COMPOSE_TOOLING)
+    api(PresentationDependency.COMPOSE_FOUNDATION)
+    api(PresentationDependency.COMPOSE_MATERIAL)
+    api(PresentationDependency.COMPOSE_ACTIVITY)
+    api(PresentationDependency.COMPOSE_NAVIGATION)
+    api(PresentationDependency.COMPOSE_HILT_NAVIGATION)
 }
