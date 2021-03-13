@@ -11,7 +11,6 @@ dependencies {
     api(CoreDependency.KOTLIN)
     api(CoreDependency.COROUTINES_CORE)
     api(CoreDependency.COROUTINES_ANDROID)
-    api(CoreDependency.HILT)
 
     // presentation
     api(PresentationDependency.APPCOMPAT)
