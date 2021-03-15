@@ -12,7 +12,7 @@ import androidx.navigation.compose.navigate
 
 @Composable
 fun AuthScreen(
-    viewModel: AuthViewModel = viewModel(),
+    viewModel: AuthViewModel,
     navController: NavController,
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
