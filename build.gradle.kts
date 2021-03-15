@@ -7,16 +7,18 @@ buildscript {
         maven("https://dl.bintray.com/kotlin/kotlin-eap/")
     }
     dependencies {
-        classpath(GradlePlugin.ANDROID_BUILD_TOOLS)
-        classpath(GradlePlugin.KOTLIN)
+        classpath(GradlePluginDependency.ANDROID_BUILD_TOOLS)
+        classpath(GradlePluginDependency.KOTLIN)
+        classpath(GradlePluginDependency.HILT)
     }
 }
 
-subprojects {
+// all projects = root project + sub projects
+allprojects {
     repositories {
         google()
         jcenter()
-        maven("https://dl.bintray.com/kotlin/kotlin-eap/")
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
