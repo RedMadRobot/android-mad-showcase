@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently -k npm:start:*",
     "start:accounts": "nodemon ./accounts/index.js",
-    "start:gateway": "wait-on tcp:5000 && nodemon ./index.js"
+    "start:gateway": "wait-on tcp:5001 && nodemon ./index.js"
   },
   "keywords": [],
   "author": "",

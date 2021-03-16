@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const { accounts } = require("../data");
 const { permissions } = require("./permissions");
 
-const { port } = require("../config") 
+const { acccounts_port } = require("../config") 
 
 const typeDefs = gql`
   type Account @key(fields: "id") {
@@ -67,6 +67,6 @@ const server = new ApolloServer({
   }
 });
 
-server.listen({ port }).then(({ url }) => {
+server.listen({ port: acccounts_port }).then(({ url }) => {
   console.log(`Accounts service ready at ${url}`);
 });
