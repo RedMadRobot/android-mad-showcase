@@ -36,7 +36,8 @@ const server = new ApolloServer({
   context: ({ req }) => {
     const user = req.user || null;
     return { user };
-  }
+  },
+  introspection: true,
 });
 
 server.applyMiddleware({ app });
