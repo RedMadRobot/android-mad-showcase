@@ -16,7 +16,7 @@ app.use(
 );
 
 const gateway = new ApolloGateway({
-  serviceList: [{ name: "accounts", url: `http://localhost:${accounts_port}`}],
+  serviceList: [{ name: "accounts", url: `http://0.0.0.0:${accounts_port}`}],
   buildService({ name, url }) {
     return new RemoteGraphQLDataSource({
       url,
@@ -42,5 +42,5 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 app.listen({ port }, () =>
-  console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`)
+  console.log(`Listening on  ${port}${server.graphqlPath}`)
 );
