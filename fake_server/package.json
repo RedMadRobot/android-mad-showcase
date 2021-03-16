@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "concurrently -k npm:server:*",
+    "start": "concurrently -k npm:server:*",
     "server:accounts": "nodemon ./accounts/index.js",
     "server:gateway": "wait-on tcp:4001 && nodemon ./index.js"
   },

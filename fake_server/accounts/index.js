@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const { accounts } = require("../data");
 const { permissions } = require("./permissions");
 
-const port = 4001;
+const { port } = require("../config") 
 
 const typeDefs = gql`
   type Account @key(fields: "id") {
