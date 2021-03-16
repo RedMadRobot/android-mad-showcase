@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently -k npm:server:*",
-    "server:accounts": "nodemon ./accounts/index.js",
-    "server:gateway": "wait-on tcp:4001 && nodemon ./index.js"
+    "start": "concurrently -k npm:start:*",
+    "start:accounts": "nodemon ./accounts/index.js",
+    "start:gateway": "wait-on tcp:5000 && nodemon ./index.js"
   },
   "keywords": [],
   "author": "",
