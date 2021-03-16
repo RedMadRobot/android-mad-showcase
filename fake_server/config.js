@@ -1,4 +1,4 @@
 module.exports = {
-    port: process.env.PORT || 5000,
-    acccounts_port: process.env.PORT || 5001
+    port: process.env.SERVER_PORT || 5000,
+    accounts_port: process.env.SERVER_ACCOUNTS_PORT || 5001
 }

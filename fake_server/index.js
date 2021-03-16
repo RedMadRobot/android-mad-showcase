@@ -1,6 +1,6 @@
 const { ApolloGateway, RemoteGraphQLDataSource } = require("@apollo/gateway");
 const { ApolloServer } = require("apollo-server-express");
-const { port, acccounts_port } = require("./config")
+const { port, accounts_port } = require("./config")
 
 const express = require("express");
 const expressJwt = require("express-jwt");
@@ -16,7 +16,7 @@ app.use(
 );
 
 const gateway = new ApolloGateway({
-  serviceList: [{ name: "accounts", url: `http://localhost:${acccounts_port}`}],
+  serviceList: [{ name: "accounts", url: `http://localhost:${accounts_port}`}],
   buildService({ name, url }) {
     return new RemoteGraphQLDataSource({
       url,
