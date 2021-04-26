@@ -3,7 +3,8 @@ include(":app")
 
 include(
     ":core:core",
-    ":core:core_presentation"
+    ":core:core_presentation",
+    ":core:core_network"
 )
 
 include(

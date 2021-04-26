@@ -10,6 +10,7 @@ buildscript {
         classpath(GradlePluginDependency.ANDROID_BUILD_TOOLS)
         classpath(GradlePluginDependency.KOTLIN)
         classpath(GradlePluginDependency.HILT)
+        classpath(GradlePluginDependency.APOLLO)
     }
 }
 

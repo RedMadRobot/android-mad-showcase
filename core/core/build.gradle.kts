@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     api(project(":core:core_presentation"))
+    api(project(":core:core_network"))
 
 
     // common

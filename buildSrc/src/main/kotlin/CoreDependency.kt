@@ -3,6 +3,8 @@ object CoreVersions {
     const val COROUTINES = "1.4.2"
 
     const val HILT = "2.33-beta"
+
+    const val APOLLO = "2.5.6"
 }
 
 object CoreDependency {
