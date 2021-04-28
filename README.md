@@ -1,4 +1,4 @@
-# Android MAD Showcase
+# Android MAD Showcase (WORK IN PROGRESS)
 
 Showcase is a sample Android project that presents Modern Android Development (MAD) libraries and practices.
 
@@ -14,7 +14,7 @@ This repository uses Jetpack Compose. For the best experience developing with Je
 * Compose (WIP)
 * Compose Navigation
 * Coroutines/Flow (WIP)
-* GraphQl/Appollo (WIP)
+* GraphQl/Appollo
 * Jetpack ViewModel
 * Hilt
 * Gradle Kotlin DSL
