@@ -4,12 +4,8 @@ plugins {
 }
 
 dependencies {
-    api(project(":core:core_presentation"))
+    api(project(":core:core_common"))
     api(project(":core:core_network"))
-
-
-    // common
-    api(CoreDependency.KOTLIN)
-    api(CoreDependency.COROUTINES_CORE)
-    api(CoreDependency.COROUTINES_ANDROID)
+    api(project(":core:core_presentation"))
+    api(project(":core:core_navigation"))
 }

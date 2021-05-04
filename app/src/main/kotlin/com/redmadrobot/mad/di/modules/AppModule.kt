@@ -1,8 +1,8 @@
 package com.redmadrobot.mad.di.modules
 
 import android.app.Application
-import com.redmadrobot.core_presentation.navigation.Router
-import com.redmadrobot.core_presentation.navigation.RouterProvider
+import com.redmadrobot.core_navigation.navigation.Router
+import com.redmadrobot.mad.MADApp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +14,6 @@ class AppModule {
 
     @Provides
     fun provideRouter(app: Application): Router {
-        return (app as RouterProvider).provideRouter()
+        return (app as MADApp).appRouter
     }
 }

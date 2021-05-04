@@ -4,39 +4,35 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.redmadrobot.auth.presentation.AuthScreen
-import com.redmadrobot.core_presentation.navigation.RouterProvider
-import com.redmadrobot.core_presentation.navigation.Screens
+import com.redmadrobot.core_navigation.navigation.composableScreen
+import com.redmadrobot.core_navigation.navigation.screens.Screens
 import com.redmadrobot.home.presentation.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private val router: AppRouter
+        get() = (application as MADApp).appRouter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { Content { (application as RouterProvider).initNavController(navController = it) } }
+        setContent { Content() }
     }
 
-    @Preview
     @Composable
-    fun Content(
-        onNavControllerInit: (NavController) -> Unit,
-    ) {
+    fun Content() {
         val navController = rememberNavController()
-        onNavControllerInit(navController)
-        val startRoute = Screens.AUTH
-        NavHost(navController, startDestination = startRoute) {
-            composable(Screens.AUTH) {
+        router.init(navController)
+        NavHost(navController, startDestination = Screens.Auth.name) {
+            composableScreen(Screens.Auth) {
                 AuthScreen(hiltNavGraphViewModel())
             }
-            composable(Screens.HOME) {
+            composableScreen(Screens.Home) {
                 HomeScreen(hiltNavGraphViewModel())
             }
         }
