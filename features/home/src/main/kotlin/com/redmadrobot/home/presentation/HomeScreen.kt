@@ -2,6 +2,7 @@ package com.redmadrobot.home.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,12 +19,15 @@ fun HomeScreen(viewModel: HomeViewModel) {
     val viewState = viewModel.viewState.collectAsState().value
     Column {
         Text(text = viewState.title, color = Color.White)
-        CardsList(viewState.cardsState)
+        CardsList(viewState.cardsState) { viewModel.onRetryClicked() }
     }
 }
 
 @Composable
-fun CardsList(cardsState: State<List<Card>>) {
+private fun CardsList(
+    cardsState: State<List<Card>>,
+    onRetryClickListener: () -> Unit,
+) {
     when (cardsState) {
         is Loading -> {
             CircularProgressIndicator()
@@ -38,7 +42,12 @@ fun CardsList(cardsState: State<List<Card>>) {
             }
         }
         is Stub -> {
-            Text(text = "error: ${cardsState.error}", color = Color.White)
+            Column {
+                Text(text = "error: ${cardsState.error}", color = Color.White)
+                Button(onClick = onRetryClickListener) {
+                    Text("Try again", color = Color.White)
+                }
+            }
         }
     }
 }

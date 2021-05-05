@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.redmadrobot.core.extensions.safeLaunch
 import com.redmadrobot.core_network.ApolloApi
 import com.redmadrobot.core_network.CardsListQuery
+import com.redmadrobot.core_network.exception.NetworkException
 import com.redmadrobot.core_presentation.extensions.update
 import com.redmadrobot.core_presentation.model.Content
 import com.redmadrobot.core_presentation.model.Loading
@@ -26,6 +27,8 @@ class HomeViewModel @Inject constructor(
     init {
         loadCards()
     }
+
+    fun onRetryClicked() = loadCards()
 
     private fun loadCards() {
         _viewState.update { copy(cardsState = Loading()) }
