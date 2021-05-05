@@ -13,7 +13,7 @@ This repository uses Jetpack Compose. For the best experience developing with Je
 * Kotlin
 * Compose (WIP)
 * Compose Navigation
-* Coroutines/Flow (WIP)
+* Coroutines/Flow
 * GraphQl/Appollo
 * Jetpack ViewModel
 * Hilt
