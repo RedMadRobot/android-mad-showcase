@@ -15,8 +15,8 @@ const typeDefs = gql`
     color: String!
   }
   extend type Query {
-    card(id: ID!): Card
-    cards: [Card]
+    card(id: ID!): Card!
+    cards: [Card!]!
   }
 `;
 
