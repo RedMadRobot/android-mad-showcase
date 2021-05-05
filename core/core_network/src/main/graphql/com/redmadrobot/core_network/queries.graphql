@@ -1,3 +1,21 @@
 mutation Login($email: String!, $password: String!){
   login(email: $email, password: $password)
 }
+
+query CardsList {
+   cards {
+     id,
+     type,
+     number,
+     color
+   }
+}
+
+query CardDetails($id:ID!) {
+   card(id: $id) {
+     id,
+     type,
+     number,
+     color
+   }
+}
