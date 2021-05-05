@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
         _viewState.update { copy(cardsState = Loading()) }
         viewModelScope.safeLaunch(
             {
-                val cards = api.query(CardsListQuery()).cards!!.mapNotNull { it!! } // TODO remove nulls
+                val cards = api.query(CardsListQuery()).cards
                 _viewState.update { copy(cardsState = Content(cards)) }
             },
             onError = { throwable ->
