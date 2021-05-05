@@ -1,11 +1,5 @@
 const { and, or, rule, shield } = require("graphql-shield");
-
-function getPermissions(user) {
-  if (user && user["https://awesomeapi.com/graphql"]) {
-    return user["https://awesomeapi.com/graphql"].permissions;
-  }
-  return [];
-}
+const { getPermissions } = require("../../lib/getPermissions");
 
 const isAuthenticated = rule()((parent, args, { user }) => {
   return user !== null;

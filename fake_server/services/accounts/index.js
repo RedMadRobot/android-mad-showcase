@@ -3,10 +3,10 @@ const { applyMiddleware } = require("graphql-middleware");
 const { buildFederatedSchema } = require("@apollo/federation");
 const jwt = require("jsonwebtoken");
 
-const { accounts } = require("../data");
+const { accounts } = require("../../data");
 const { permissions } = require("./permissions");
 
-const { accounts_port } = require("../config")
+const { accounts_port } = require("../../config")
 
 const typeDefs = gql`
   type Account @key(fields: "id") {

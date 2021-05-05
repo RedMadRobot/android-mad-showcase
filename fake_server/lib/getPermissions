@@ -1,0 +1,8 @@
+function getPermissions(user) {
+  if (user && user["https://awesomeapi.com/graphql"]) {
+    return user["https://awesomeapi.com/graphql"].permissions;
+  }
+  return [];
+}
+
+module.exports = { getPermissions }

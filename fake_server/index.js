@@ -1,6 +1,6 @@
 const { ApolloGateway, RemoteGraphQLDataSource } = require("@apollo/gateway");
 const { ApolloServer } = require("apollo-server-express");
-const { port, accounts_port } = require("./config")
+const { port, accounts_port, cards_port } = require("./config")
 
 const express = require("express");
 const expressJwt = require("express-jwt");
@@ -9,14 +9,17 @@ const app = express();
 
 app.use(
   expressJwt({
-    secret: "f1BtnWgD3VKY",
+    secret: "f1BtnWgD3VKY", // TODO move to envs
     algorithms: ["HS256"],
     credentialsRequired: false
   })
 );
 
 const gateway = new ApolloGateway({
-  serviceList: [{ name: "accounts", url: `http://0.0.0.0:${accounts_port}`}],
+  serviceList: [
+    { name: "accounts", url: `http://0.0.0.0:${accounts_port}`},
+    { name: "cards", url: `http://0.0.0.0:${cards_port}`}
+  ],
   buildService({ name, url }) {
     return new RemoteGraphQLDataSource({
       url,

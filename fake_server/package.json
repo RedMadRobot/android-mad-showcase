@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently -k npm:start:*",
-    "start:accounts": "nodemon ./accounts/index.js",
-    "start:gateway": "wait-on tcp:5001 && nodemon ./index.js"
+    "start:accounts": "nodemon ./services/accounts/index.js",
+    "start:cards": "nodemon ./services/cards/index.js",
+    "start:gateway": "wait-on tcp:5002 && nodemon ./index.js"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,7 @@
     "express": "^4.17.1",
     "express-jwt": "^5.3.3",
     "graphql-middleware": "^4.0.2",
-    "graphql-shield": "^7.2.3",
+    "graphql-shield": "^7.5.0",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.3",
     "wait-on": "^4.0.2"
