@@ -1,5 +1,8 @@
 package com.redmadrobot.auth.presentation
 
+import android.app.Application
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redmadrobot.core.extensions.safeLaunch
@@ -14,6 +17,7 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val api: ApolloApi,
     private val router: Router,
+    private val context: Application,
 ) : ViewModel() {
 
     fun onLoginClicked() {
@@ -23,6 +27,7 @@ class AuthViewModel @Inject constructor(
                 router.navigate(Screens.Home)
             },
             onError = { throwable ->
+                Toast.makeText(context, throwable.localizedMessage, Toast.LENGTH_LONG).show()
             }
         )
     }
