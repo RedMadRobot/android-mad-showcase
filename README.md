@@ -19,6 +19,10 @@ This repository uses Jetpack Compose. For the best experience developing with Je
 * Hilt
 * Gradle Kotlin DSL
 
+## Known Issues
+
+* Cannot use Hilt in a layered multi-module project with `api` gradle configuration https://dagger.dev/hilt/gradle-setup#classpath-aggregation
+
 ## License
 ```
 MIT License
