@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(
     private val api: ApolloApi
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(HomeViewState(cards = Loading()))
+    private val _viewState = MutableStateFlow(HomeViewState(cardsState = Loading()))
     val viewState: StateFlow<HomeViewState> = _viewState
 
     init {
@@ -28,14 +28,14 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadCards() {
-        _viewState.update { copy(cards = Loading()) }
+        _viewState.update { copy(cardsState = Loading()) }
         viewModelScope.safeLaunch(
             {
                 val cards = api.query(CardsListQuery()).cards!!.mapNotNull { it!! } // TODO remove nulls
-                _viewState.update { copy(cards = Content(cards)) }
+                _viewState.update { copy(cardsState = Content(cards)) }
             },
             onError = { throwable ->
-                _viewState.update { copy(cards = Stub(throwable)) }
+                _viewState.update { copy(cardsState = Stub(throwable)) }
             }
         )
     }

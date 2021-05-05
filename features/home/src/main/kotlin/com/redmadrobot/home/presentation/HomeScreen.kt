@@ -18,7 +18,7 @@ fun HomeScreen(viewModel: HomeViewModel) {
     val viewState = viewModel.viewState.collectAsState().value
     Column {
         Text(text = viewState.title, color = Color.White)
-        CardsList(viewState.cards)
+        CardsList(viewState.cardsState)
     }
 }
 
