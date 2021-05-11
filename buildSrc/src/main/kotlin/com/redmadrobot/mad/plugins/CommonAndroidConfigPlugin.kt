@@ -26,8 +26,8 @@ class CommonAndroidConfigPlugin : Plugin<Project> {
     private fun Project.applyAndroidConfig() {
         android?.run {
             defaultConfig {
-                minSdkVersion(AndroidConfig.MIN_SDK_VERSION)
-                targetSdkVersion(AndroidConfig.TARGET_SDK_VERSION)
+                minSdk = AndroidConfig.MIN_SDK_VERSION
+                targetSdk = AndroidConfig.TARGET_SDK_VERSION
                 compileSdkVersion(AndroidConfig.COMPILE_SDK_VERSION)
             }
 
@@ -53,7 +53,6 @@ class CommonAndroidConfigPlugin : Plugin<Project> {
                 getByName(BuildType.RELEASE) {
                     isDebuggable = false
                     isMinifyEnabled = true
-                    isShrinkResources = true
                     proguardFiles(*proguardFiles.toTypedArray())
                 }
             }
@@ -71,7 +70,6 @@ class CommonAndroidConfigPlugin : Plugin<Project> {
                 }
 
                 getByName(BuildType.RELEASE) {
-                    isDebuggable = false
                     isMinifyEnabled = true
                     proguardFiles(*proguardFiles.toTypedArray())
                 }
