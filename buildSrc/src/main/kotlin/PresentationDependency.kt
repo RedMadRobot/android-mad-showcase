@@ -17,6 +17,7 @@ object PresentationDependency {
     const val COMPOSE_FOUNDATION = "androidx.compose.foundation:foundation:${PresentationVersions.COMPOSE}"
     const val COMPOSE_FOUNDATION_LAYOUT = "androidx.compose.foundation:foundation-layout:${PresentationVersions.COMPOSE}"
     const val COMPOSE_MATERIAL = "androidx.compose.material:material:${PresentationVersions.COMPOSE}"
+    const val COMPOSE_ANIMATION = "androidx.compose.animation:animation:${PresentationVersions.COMPOSE}"
 
     const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:${PresentationVersions.COMPOSE_ACTIVITY}"
     const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:${PresentationVersions.COMPOSE_NAVIGATION}"
