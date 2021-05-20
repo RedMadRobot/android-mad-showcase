@@ -1,4 +1,4 @@
-package com.redmadrobot.home.presentation
+package com.redmadrobot.home.presentation.model
 
 import com.redmadrobot.home.R
 
