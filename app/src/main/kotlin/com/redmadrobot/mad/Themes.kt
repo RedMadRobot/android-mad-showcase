@@ -7,9 +7,11 @@ import androidx.compose.ui.graphics.Color
 
 val lightThemeColors
     get() = lightColors(
-        primary = Color.Black,
+        primary = Primary,
         onPrimary = Color.White
     )
+
+val Primary = Color(0xFF3E3058)
 
 @Composable
 fun AppTheme(content: @Composable () -> Unit) = MaterialTheme(colors = lightThemeColors, content = content)

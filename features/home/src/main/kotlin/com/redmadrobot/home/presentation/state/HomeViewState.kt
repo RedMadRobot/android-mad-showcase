@@ -1,9 +1,8 @@
 package com.redmadrobot.home.presentation.state
 
-import com.redmadrobot.core_network.CardsListQuery.Card
 import com.redmadrobot.core_presentation.model.State
+import com.redmadrobot.home.presentation.model.CardViewInfoUi
 
 data class HomeViewState(
-   val title: String = "Cards List",
-   val cardsState: State<List<Card>>
+   val cardsState: State<List<CardViewInfoUi>>,
 )

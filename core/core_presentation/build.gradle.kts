@@ -8,6 +8,7 @@ dependencies {
 
     api(PresentationDependency.APPCOMPAT)
     api(PresentationDependency.COMPOSE_UI)
+    api(PresentationDependency.COMPOSE_ANIMATION)
     api(PresentationDependency.COMPOSE_COMPILER)
     api(PresentationDependency.COMPOSE_TOOLING)
     api(PresentationDependency.COMPOSE_FOUNDATION)
