@@ -12,6 +12,6 @@ include(
 
 include(
     ":features:auth",
-    ":features:home"
+    ":features:home",
+    ":features:details"
 )
-

@@ -16,6 +16,7 @@ dependencies {
 
     implementation(project(":features:auth"))
     implementation(project(":features:home"))
+    implementation(project(":features:details"))
 
     implementation(CoreDependency.HILT)
     kapt(CoreDependency.HILT_COMPILER)
