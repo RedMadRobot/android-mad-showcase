@@ -3,19 +3,14 @@ package com.redmadrobot.details.presentation
 import android.annotation.SuppressLint
 import android.graphics.*
 import android.text.TextPaint
-import android.util.Log
 import android.view.MotionEvent
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.Canvas
@@ -28,7 +23,6 @@ import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
@@ -37,7 +31,7 @@ import com.redmadrobot.core_presentation.model.Loading
 import com.redmadrobot.core_presentation.model.State
 import com.redmadrobot.core_presentation.model.Stub
 import com.redmadrobot.details.R
-import com.redmadrobot.details.presentation.model.CardDetailsUi
+import com.redmadrobot.details.presentation.model.*
 
 @Composable
 fun DetailsScreen(viewModel: DetailsViewModel) {
@@ -66,37 +60,18 @@ fun CreateDetailsCard(detailsState: State<CardDetailsUi>, onRetryClickListener: 
     }
 }
 
-private val choosePart: MutableState<Int> = mutableStateOf(4)
-var circlePoint: MutableState<Offset> = mutableStateOf(Offset(0f, 0f))
-var cardPoints = emptyList<Offset>()
-var additionalPoints = emptyList<PointF>()
-var scaleListPoints = emptyList<PointF>()
-var downY = mutableStateOf(0f)
-val cardPath = Path()
-var axisYStep = 0f
-var circleCoordinateX = 0f
-var scaleVerticalMargin = 0f
-var scaleBottomMargin = 0f
-var scaleRightMargin = 0f
-var radius = 0f
-val countParts = 10
-var height = mutableStateOf(0f)
-var width = 0f
-var scaleHeight = 0f
-var border = 0f
-
 @SuppressLint("UseCompatLoadingForDrawables")
 @Composable
 fun CreateCustomCard(
     card: CardDetailsUi
 ) {
-    val maxValueY = 305f
-    val minValueY = 0f
     val imageSize = with(LocalDensity.current) { 150.dp.toPx() }.toInt()
     val cardIconWidth = with(LocalDensity.current) { 70.dp.toPx() }.toInt()
     val cardIconHeight = with(LocalDensity.current) { 40.dp.toPx() }.toInt()
     val circleIconWidth = with(LocalDensity.current) { 10.dp.toPx() }.toInt()
     val circleIconHeight = with(LocalDensity.current) { 24.dp.toPx() }.toInt()
+    val innerMaskImageHeight = with(LocalDensity.current) { 90.dp.toPx() }.toInt()
+    val innerMaskImageWidth = with(LocalDensity.current) { 80.dp.toPx() }.toInt()
     val leftMargin = with(LocalDensity.current) { 20.dp.toPx() }
     val imageRadius = with(LocalDensity.current) { 50.dp.toPx() }
     val imageCxCoordinate = with(LocalDensity.current) { 70.dp.toPx() }
@@ -163,14 +138,19 @@ fun CreateCustomCard(
         color = android.graphics.Color.WHITE
     }
 
+    val typeIconPaint = Paint().asFrameworkPaint().apply {
+        isAntiAlias = true
+        style = android.graphics.Paint.Style.FILL
+    }
+
     val textPaint = TextPaint().apply {
         isAntiAlias = true
         textSize = numberTextSize
         color = android.graphics.Color.WHITE
     }
 
-    val sourceBitmap = LocalContext.current.getDrawable(R.drawable.ic_master)
-        ?.toBitmap(160, 160, Bitmap.Config.ARGB_8888)
+    val sourceBitmap = LocalContext.current.getDrawable(R.drawable.ic_iron_man)
+        ?.toBitmap(innerMaskImageWidth, innerMaskImageHeight, Bitmap.Config.ARGB_8888)
     val maskBitmap = Bitmap.createBitmap(imageSize, imageSize, Bitmap.Config.ARGB_8888)
     val resultBitmap = maskBitmap.copy(Bitmap.Config.ARGB_8888, true)
     val maskCanvas = android.graphics.Canvas(maskBitmap)
@@ -178,15 +158,15 @@ fun CreateCustomCard(
     maskPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
     val resultCanvas = android.graphics.Canvas(resultBitmap)
     resultCanvas.drawBitmap(maskBitmap, 0f, 0f, null)
-    sourceBitmap?.let { resultCanvas.drawBitmap(it, imageCxCoordinate - 80, imageCxCoordinate, maskPaint) }
+    sourceBitmap?.let { resultCanvas.drawBitmap(it, 90f, 130f, null) }
 
     val iconSourceBitmap = LocalContext.current.getDrawable(R.drawable.ic_master)
         ?.toBitmap(cardIconWidth, cardIconHeight, Bitmap.Config.ARGB_8888)
+    typeIconPaint.colorFilter =
+        PorterDuffColorFilter(card.iconColor.toArgb(), PorterDuff.Mode.SRC_IN)
 
     val circleIconBitmap = LocalContext.current.getDrawable(R.drawable.ic_circle_arrow)
         ?.toBitmap(circleIconWidth, circleIconHeight, Bitmap.Config.ARGB_8888)
-
-    var upY = 0f
 
     Canvas(modifier = Modifier
         .fillMaxWidth()
@@ -256,7 +236,7 @@ fun CreateCustomCard(
             )
             drawImage(
                 canvas = canvas.nativeCanvas,
-                bitmap = resultBitmap,
+                bitmap = resultBitmap
             )
             drawBudget(
                 canvas = canvas.nativeCanvas,
@@ -268,6 +248,7 @@ fun CreateCustomCard(
                 canvas = canvas.nativeCanvas,
                 bitmap = iconSourceBitmap,
                 coordinates = Offset(leftMargin, iconTopMargin),
+                paint = typeIconPaint
             )
         }
     }
@@ -284,7 +265,7 @@ private fun updateCoordinates(position: Int) {
 
 private fun drawImage(
     canvas: android.graphics.Canvas,
-    bitmap: Bitmap,
+    bitmap: Bitmap
 ) {
     canvas.drawBitmap(bitmap, 0f, 0f, null)
 }
@@ -292,16 +273,29 @@ private fun drawImage(
 private fun drawCardType(
     canvas: android.graphics.Canvas,
     bitmap: Bitmap?,
-    coordinates: Offset
+    coordinates: Offset,
+    paint: android.graphics.Paint
 ) {
-    bitmap?.let { canvas.drawBitmap(it, coordinates.x, coordinates.y, null) }
+    bitmap?.let { canvas.drawBitmap(it, coordinates.x, coordinates.y, paint) }
 }
 
-private fun drawBudget(canvas: android.graphics.Canvas, number: String, coordinates: Offset, paint: TextPaint) {
+private fun drawBudget(
+    canvas: android.graphics.Canvas,
+    number: String,
+    coordinates: Offset,
+    paint: TextPaint
+) {
     canvas.drawText(number, coordinates.x, coordinates.y, paint)
 }
 
-private fun drawCircle(canvas: Canvas, innerPaint: Paint, outerPaint: Paint, center: Offset, bitmap: Bitmap?, bitmapCenter: Offset) {
+private fun drawCircle(
+    canvas: Canvas,
+    innerPaint: Paint,
+    outerPaint: Paint,
+    center: Offset,
+    bitmap: Bitmap?,
+    bitmapCenter: Offset
+) {
     canvas.drawCircle(
         center = center,
         radius = radius - border,
@@ -312,7 +306,14 @@ private fun drawCircle(canvas: Canvas, innerPaint: Paint, outerPaint: Paint, cen
         radius = radius,
         paint = outerPaint
     )
-    bitmap?.let { canvas.nativeCanvas.drawBitmap(it, center.x - bitmapCenter.x / 2, center.y - bitmapCenter.y / 2, null) }
+    bitmap?.let {
+        canvas.nativeCanvas.drawBitmap(
+            it,
+            center.x - bitmapCenter.x / 2,
+            center.y - bitmapCenter.y / 2,
+            null
+        )
+    }
 }
 
 private fun drawScale(canvas: Canvas, scalePoints: List<PointF>, paint: Paint) {
@@ -342,7 +343,7 @@ private fun buildCardPath(path: Path) {
                 path.cubicTo(
                     additionalPoints[2].x, additionalPoints[2].y,
                     additionalPoints[3].x, additionalPoints[3].y,
-                    point.x, point.y
+                    point.x, point.y + radius / 3
                 )
             }
             else -> path.lineTo(point.x, point.y)
@@ -374,6 +375,7 @@ private fun additionalCirclePoints(): List<PointF> {
         PointF(middleCirclePoint.x, middleCirclePoint.y + 4 * radius / 3)
     val additionSecondBottomCirclePoint =
         PointF(bottomCirclePoint.x, bottomCirclePoint.y - radius / 3)
+
     return listOf(
         additionFirstTopCirclePoint,
         additionSecondTopCirclePoint,

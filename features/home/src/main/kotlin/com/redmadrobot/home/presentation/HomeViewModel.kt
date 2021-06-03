@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    fun navigateToDetails(id: String) {
+    fun onCardClicked(id: String) {
         router.navigate(Screens.details(id))
     }
 }

@@ -1,4 +1,4 @@
-package com.redmadrobot.core.model
+package com.redmadrobot.base_cards.model
 
 import com.redmadrobot.core.R
 

@@ -34,7 +34,7 @@ import com.redmadrobot.home.presentation.model.CardViewInfoUi
 fun HomeScreen(viewModel: HomeViewModel) {
     val viewState = viewModel.viewState.collectAsState().value
     Column {
-        HomeContent(viewState.cardsState, viewModel) { viewModel.onRetryClicked() }
+        HomeContent(viewState.cardsState, viewModel)
     }
 }
 
@@ -129,7 +129,6 @@ fun Modifier.drawColoredShadow(
 @Composable
 private fun CardsList(item: CardViewInfoUi, viewModel: HomeViewModel) {
     val height = 200.dp
-    val context = LocalContext.current
     Column(
         Modifier
             .padding(horizontal = 10.dp, vertical = 10.dp)
@@ -142,10 +141,7 @@ private fun CardsList(item: CardViewInfoUi, viewModel: HomeViewModel) {
                 offsetDarkY = 10.dp
             )
             .clickable {
-                viewModel.navigateToDetails(item.id)
-//                Toast
-//                    .makeText(context, "Number: ${item.number}", Toast.LENGTH_SHORT)
-//                    .show()
+                viewModel.onCardClicked(item.id)
             }
             .fillMaxWidth()
             .height(height)
@@ -192,7 +188,6 @@ private fun CardsList(item: CardViewInfoUi, viewModel: HomeViewModel) {
 private fun HomeContent(
     cardsState: State<List<CardViewInfoUi>>,
     viewModel: HomeViewModel,
-    onRetryClickListener: () -> Unit,
 ) {
     when (cardsState) {
         is Loading -> {
@@ -217,7 +212,7 @@ private fun HomeContent(
         is Stub -> {
             Column {
                 Text(text = "error: ${cardsState.error}", color = Color.White)
-                Button(onClick = onRetryClickListener) {
+                Button(onClick = { viewModel.onRetryClicked() }) {
                     Text("Try again", color = Color.White)
                 }
             }

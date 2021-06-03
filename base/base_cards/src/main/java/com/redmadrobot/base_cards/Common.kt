@@ -1,10 +1,7 @@
-package com.redmadrobot.core
+package com.redmadrobot.base_cards
 
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import com.redmadrobot.core.model.CardBorderGradient
-import com.redmadrobot.core.model.CardGradient
-import com.redmadrobot.core.model.TypeIconCard
+import com.redmadrobot.base_cards.model.TypeIconCard
 
 const val PINK_COLOR = "pink"
 const val BLUE_COLOR = "blue"

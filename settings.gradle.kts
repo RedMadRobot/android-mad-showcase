@@ -15,3 +15,4 @@ include(
     ":features:home",
     ":features:details"
 )
+include("base:base_cards")
