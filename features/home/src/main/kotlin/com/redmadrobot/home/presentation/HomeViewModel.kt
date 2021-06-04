@@ -1,9 +1,9 @@
 package com.redmadrobot.home.presentation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavType
-import androidx.navigation.compose.navArgument
+import com.redmadrobot.base_cards.toCardViewState
 import com.redmadrobot.core.extensions.safeLaunch
 import com.redmadrobot.core_navigation.navigation.Router
 import com.redmadrobot.core_navigation.navigation.screens.Screens
@@ -23,10 +23,19 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val api: ApolloApi,
     private val router: Router,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(HomeViewState(cardsState = Loading()))
+    companion object {
+        private const val SCROLL_TO_LAST_POSITION_KEY = "SCROLL_TO_LAST_POSITION_KEY"
+    }
+
+    private val _viewState = MutableStateFlow(HomeViewState(cards = Loading()))
     val viewState: StateFlow<HomeViewState> = _viewState
+
+    // Fix negative arrangement: in initial state the list have a wrong position
+    var scrollToLastPosition = savedStateHandle.get<Boolean>(SCROLL_TO_LAST_POSITION_KEY) ?: true
+        private set
 
     init {
         loadCards()
@@ -34,20 +43,25 @@ class HomeViewModel @Inject constructor(
 
     fun onRetryClicked() = loadCards()
 
+    fun onLastPositionScrolled() {
+        savedStateHandle.set(SCROLL_TO_LAST_POSITION_KEY, false)
+        scrollToLastPosition = false
+    }
+
     private fun loadCards() {
-        _viewState.update { copy(cardsState = Loading()) }
+        _viewState.update { copy(cards = Loading()) }
         viewModelScope.safeLaunch(
             {
                 val cards = api.query(CardsListQuery()).cards
-                _viewState.update { copy(cardsState = Content(cards.map {it.toCardViewInfoUi()})) }
+                _viewState.update { copy(cards = Content(cards.map(CardsListQuery.Card::toCardViewState))) }
             },
             onError = { throwable ->
-                _viewState.update { copy(cardsState = Stub(throwable)) }
+                _viewState.update { copy(cards = Stub(throwable)) }
             }
         )
     }
 
     fun onCardClicked(id: String) {
-        router.navigate(Screens.details(id))
+        router.navigate(Screens.toDetails(id))
     }
 }

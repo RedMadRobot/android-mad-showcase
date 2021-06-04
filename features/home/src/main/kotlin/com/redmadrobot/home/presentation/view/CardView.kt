@@ -1,9 +1,6 @@
 package com.redmadrobot.home.presentation.view
 
 import android.annotation.SuppressLint
-import android.os.Build
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -21,18 +18,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.redmadrobot.base_cards.model.CardViewState
 import com.redmadrobot.home.R
-import com.redmadrobot.home.presentation.model.CardViewInfoUi
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun CardView(item: CardViewInfoUi) {
+fun CardView(cardViewState: CardViewState, onCardClicked: (String) -> Unit) {
     val height = 200.dp
-    val context = LocalContext.current
     Column(
         Modifier
             .padding(horizontal = 10.dp, vertical = 10.dp)
@@ -45,22 +40,20 @@ fun CardView(item: CardViewInfoUi) {
                 offsetDarkY = 10.dp
             )
             .clickable {
-                Toast
-                    .makeText(context, "Number: ${item.number}", Toast.LENGTH_SHORT)
-                    .show()
+                onCardClicked(cardViewState.id)
             }
             .fillMaxWidth()
             .height(height)
             .clip(RoundedCornerShape(10.dp))
-            .background(item.cardGradient)
-            .border(BorderStroke(1.dp, item.cardBorderGradient), RoundedCornerShape(10.dp))
+            .background(cardViewState.cardGradient)
+            .border(BorderStroke(1.dp, cardViewState.borderGradient), RoundedCornerShape(10.dp))
     ) {
         Icon(
             modifier = Modifier
                 .padding(30.dp),
             painter = painterResource(id = R.drawable.ic_subtract),
             contentDescription = "substract",
-            tint = item.iconColor,
+            tint = cardViewState.iconColor,
         )
         Spacer(modifier = Modifier.height(40.dp))
         Row(
@@ -74,15 +67,15 @@ fun CardView(item: CardViewInfoUi) {
                     .align(Alignment.Bottom)
                     .drawTextColoredShadow(
                         shadowColor = Color.White,
-                        textColor = item.iconColor,
-                        text = item.number
+                        textColor = cardViewState.iconColor,
+                        text = cardViewState.number
                     ), color = Color.Black, text = ""
             )
             Icon(
                 modifier = Modifier.align(Alignment.Bottom),
-                painter = painterResource(id = item.iconRes),
+                painter = painterResource(id = cardViewState.iconRes),
                 contentDescription = "type",
-                tint = item.iconColor
+                tint = cardViewState.iconColor
             )
         }
     }

@@ -1,4 +1,4 @@
-package com.redmadrobot.details.presentation.model
+package com.redmadrobot.base_cards.model
 
 import androidx.compose.ui.graphics.Color
 
