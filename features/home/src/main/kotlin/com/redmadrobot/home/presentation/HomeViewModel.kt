@@ -2,7 +2,11 @@ package com.redmadrobot.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavType
+import androidx.navigation.compose.navArgument
 import com.redmadrobot.core.extensions.safeLaunch
+import com.redmadrobot.core_navigation.navigation.Router
+import com.redmadrobot.core_navigation.navigation.screens.Screens
 import com.redmadrobot.core_network.ApolloApi
 import com.redmadrobot.core_network.CardsListQuery
 import com.redmadrobot.core_presentation.extensions.update
@@ -17,7 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val api: ApolloApi
+    private val api: ApolloApi,
+    private val router: Router,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(HomeViewState(cardsState = Loading()))
@@ -40,5 +45,9 @@ class HomeViewModel @Inject constructor(
                 _viewState.update { copy(cardsState = Stub(throwable)) }
             }
         )
+    }
+
+    fun onCardClicked(id: String) {
+        router.navigate(Screens.details(id))
     }
 }

@@ -2,7 +2,6 @@ package com.redmadrobot.home.presentation
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -35,7 +34,7 @@ import com.redmadrobot.home.presentation.model.CardViewInfoUi
 fun HomeScreen(viewModel: HomeViewModel) {
     val viewState = viewModel.viewState.collectAsState().value
     Column {
-        HomeContent(viewState.cardsState) { viewModel.onRetryClicked() }
+        HomeContent(viewState.cardsState, viewModel)
     }
 }
 
@@ -128,9 +127,8 @@ fun Modifier.drawColoredShadow(
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnrememberedMutableState")
 @Composable
-private fun CardsList(item: CardViewInfoUi) {
+private fun CardsList(item: CardViewInfoUi, viewModel: HomeViewModel) {
     val height = 200.dp
-    val context = LocalContext.current
     Column(
         Modifier
             .padding(horizontal = 10.dp, vertical = 10.dp)
@@ -143,9 +141,7 @@ private fun CardsList(item: CardViewInfoUi) {
                 offsetDarkY = 10.dp
             )
             .clickable {
-                Toast
-                    .makeText(context, "Number: ${item.number}", Toast.LENGTH_SHORT)
-                    .show()
+                viewModel.onCardClicked(item.id)
             }
             .fillMaxWidth()
             .height(height)
@@ -191,7 +187,7 @@ private fun CardsList(item: CardViewInfoUi) {
 @Composable
 private fun HomeContent(
     cardsState: State<List<CardViewInfoUi>>,
-    onRetryClickListener: () -> Unit,
+    viewModel: HomeViewModel,
 ) {
     when (cardsState) {
         is Loading -> {
@@ -209,14 +205,14 @@ private fun HomeContent(
             ) {
                 items(count = cards.size) { cardIndex ->
                     val card = cards[cardIndex]
-                    CardsList(item = card)
+                    CardsList(item = card, viewModel = viewModel)
                 }
             }
         }
         is Stub -> {
             Column {
                 Text(text = "error: ${cardsState.error}", color = Color.White)
-                Button(onClick = onRetryClickListener) {
+                Button(onClick = { viewModel.onRetryClicked() }) {
                     Text("Try again", color = Color.White)
                 }
             }

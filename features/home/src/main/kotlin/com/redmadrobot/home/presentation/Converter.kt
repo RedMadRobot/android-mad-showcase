@@ -2,14 +2,9 @@ package com.redmadrobot.home.presentation
 
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import com.redmadrobot.base_cards.*
 import com.redmadrobot.core_network.CardsListQuery.Card
 import com.redmadrobot.home.presentation.model.*
-
-const val PINK_COLOR = "pink"
-const val BLUE_COLOR = "blue"
-const val RED_COLOR = "red"
-const val YELLOW_COLOR = "yellow"
-const val GREEN_COLOR = "green"
 
 fun Card.toCardViewInfoUi(): CardViewInfoUi {
     return CardViewInfoUi(
@@ -53,24 +48,5 @@ fun determineCardBorderGradient(color: String): Brush {
         YELLOW_COLOR -> CardBorderGradient.YELLOW.brush
         GREEN_COLOR -> CardBorderGradient.GREEN.brush
         else -> CardBorderGradient.YELLOW.brush
-    }
-}
-
-fun determineIconColor(color: String): Color {
-    return when (color) {
-        PINK_COLOR -> Color(0xFF8D7CE7)
-        BLUE_COLOR -> Color(0xFF6D94DA)
-        RED_COLOR -> Color(0xEECF5942)
-        YELLOW_COLOR -> Color(0xFFDB8A3F)
-        GREEN_COLOR -> Color(0xFF539A83)
-        else -> Color(0xFF539A83)
-    }
-}
-
-fun determineIcon(type: String): Int {
-    return when (type) {
-        "VISA" -> TypeIconCard.VISA.icon
-        "MASTER_CARD" -> TypeIconCard.MASTERCARD.icon
-        else -> TypeIconCard.MASTERCARD.icon
     }
 }
