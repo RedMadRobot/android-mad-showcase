@@ -1,7 +1,6 @@
 package com.redmadrobot.mad
 
 import androidx.navigation.NavController
-import androidx.navigation.compose.navigate
 import com.redmadrobot.core_navigation.navigation.Router
 import com.redmadrobot.core_navigation.navigation.Screen
 
