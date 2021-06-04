@@ -4,8 +4,6 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":core:core_common"))
-
     api(PresentationDependency.APPCOMPAT)
     api(PresentationDependency.COMPOSE_UI)
     api(PresentationDependency.COMPOSE_ANIMATION)
