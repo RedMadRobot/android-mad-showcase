@@ -7,6 +7,7 @@ plugins {
 
 dependencies {
     implementation(project(":core:core"))
+    implementation(project(":base:base_cards"))
 
     implementation(CoreDependency.HILT)
     kapt(CoreDependency.HILT_COMPILER)

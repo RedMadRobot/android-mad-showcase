@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.redmadrobot.auth.presentation.AuthScreen
 import com.redmadrobot.core_navigation.navigation.composableScreen
 import com.redmadrobot.core_navigation.navigation.screens.Screens
+import com.redmadrobot.details.presentation.DetailsScreen
 import com.redmadrobot.home.presentation.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
             }
             composableScreen(Screens.Home) {
                 HomeScreen(hiltNavGraphViewModel())
+            }
+            composableScreen(Screens.Details) {
+                DetailsScreen(hiltNavGraphViewModel())
             }
         }
     }
