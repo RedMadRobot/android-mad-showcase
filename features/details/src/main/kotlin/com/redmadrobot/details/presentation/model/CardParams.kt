@@ -1,13 +1,10 @@
 package com.redmadrobot.details.presentation.model
 
 import android.graphics.PointF
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 
-val choosePart: MutableState<Int> = mutableStateOf(4)
-var circlePoint: MutableState<Offset> = mutableStateOf(Offset(0f, 0f))
 var cardPoints = emptyList<Offset>()
 var additionalPoints = emptyList<PointF>()
 var scaleListPoints = emptyList<PointF>()
@@ -24,3 +21,7 @@ var height = mutableStateOf(0f)
 var width = 0f
 var scaleHeight = 0f
 var border = 0f
+const val maxSum = 600
+const val minSum = 0
+const val currentSum = maxSum - (maxSum - minSum) / countParts * 5
+const val max = maxSum - (maxSum - minSum) / countParts
