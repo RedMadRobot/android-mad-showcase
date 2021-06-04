@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.redmadrobot.auth.presentation.AuthScreen
@@ -33,15 +33,15 @@ class MainActivity : AppCompatActivity() {
     fun Content() {
         val navController = rememberNavController()
         router.init(navController)
-        NavHost(navController, startDestination = Screens.Home.name) {
+        NavHost(navController, startDestination = Screens.Auth.name) {
             composableScreen(Screens.Auth) {
-                AuthScreen(hiltNavGraphViewModel())
+                AuthScreen(hiltViewModel())
             }
             composableScreen(Screens.Home) {
-                HomeScreen(hiltNavGraphViewModel())
+                HomeScreen(hiltViewModel())
             }
             composableScreen(Screens.Details) {
-                DetailsScreen(hiltNavGraphViewModel())
+                DetailsScreen(hiltViewModel())
             }
         }
     }
