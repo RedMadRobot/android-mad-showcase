@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     fun Content() {
         val navController = rememberNavController()
         router.init(navController)
-        NavHost(navController, startDestination = Screens.Auth.name) {
+        NavHost(navController, startDestination = Screens.Home.name) {
             composableScreen(Screens.Auth) {
                 AuthScreen(hiltNavGraphViewModel())
             }
