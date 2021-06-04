@@ -16,8 +16,6 @@ apollo {
 }
 
 dependencies {
-    implementation(project(":core:core_common"))
-
     api(NetworkDependency.APOLLO_GRAPHQL)
     api(NetworkDependency.APOLLO_COROUTINES)
 }

@@ -4,10 +4,13 @@ include(":app")
 
 include(
     ":core:core",
-    ":core:core_common",
     ":core:core_navigation",
     ":core:core_network",
     ":core:core_presentation"
+)
+
+include(
+    "base:base_cards"
 )
 
 include(
@@ -15,4 +18,3 @@ include(
     ":features:home",
     ":features:details"
 )
-include("base:base_cards")
