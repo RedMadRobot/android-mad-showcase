@@ -4,13 +4,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redmadrobot.core.extensions.safeLaunch
-import com.redmadrobot.core_navigation.navigation.Router
 import com.redmadrobot.core_network.ApolloApi
 import com.redmadrobot.core_network.CardDetailsQuery
 import com.redmadrobot.core_presentation.extensions.update
 import com.redmadrobot.core_presentation.model.Content
 import com.redmadrobot.core_presentation.model.Loading
 import com.redmadrobot.core_presentation.model.Stub
+import com.redmadrobot.details.presentation.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,11 +19,15 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val api: ApolloApi,
-    private val router: Router,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(DetailsViewState(cardDetailsState = Loading()))
+    private val _viewState = MutableStateFlow(
+        DetailsViewState(
+            cardDetailsState = Loading(),
+            currentSum = currentSum
+        )
+    )
     val viewState: StateFlow<DetailsViewState> = _viewState
     private val id = savedStateHandle.get<String>("id")
 
@@ -32,6 +36,11 @@ class DetailsViewModel @Inject constructor(
     }
 
     fun onRetryClicked() = loadDetails()
+
+    fun updateSum(position: Int) {
+        val sum = maxSum - (maxSum - minSum) / countParts * (position + 1)
+        _viewState.update { copy(currentSum = sum) }
+    }
 
     private fun loadDetails() {
         _viewState.update { copy(cardDetailsState = Loading()) }

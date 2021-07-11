@@ -36,18 +36,18 @@ import com.redmadrobot.details.presentation.model.*
 @Composable
 fun DetailsScreen(viewModel: DetailsViewModel) {
     val viewState = viewModel.viewState.collectAsState().value
-    CreateDetailsCard(viewState.cardDetailsState) { viewModel.onRetryClicked() }
+    CreateDetailsCard(viewState.cardDetailsState, viewModel ,viewState.currentSum) { viewModel.onRetryClicked() }
 }
 
 @Composable
-fun CreateDetailsCard(detailsState: State<CardDetailsUi>, onRetryClickListener: () -> Unit) {
+fun CreateDetailsCard(detailsState: State<CardDetailsUi>, viewModel: DetailsViewModel, currentSum: Int, onRetryClickListener: () -> Unit) {
     when (detailsState) {
         is Loading -> {
             CircularProgressIndicator()
         }
         is Content -> {
             val cardDetails = detailsState.content
-            CreateCustomCard(cardDetails)
+            CreateCustomCard(cardDetails, currentSum, viewModel)
         }
         is Stub -> {
             Column {
@@ -63,7 +63,9 @@ fun CreateDetailsCard(detailsState: State<CardDetailsUi>, onRetryClickListener: 
 @SuppressLint("UseCompatLoadingForDrawables")
 @Composable
 fun CreateCustomCard(
-    card: CardDetailsUi
+    card: CardDetailsUi,
+    currentSum: Int,
+    viewModel: DetailsViewModel
 ) {
     val imageSize = with(LocalDensity.current) { 150.dp.toPx() }.toInt()
     val cardIconWidth = with(LocalDensity.current) { 70.dp.toPx() }.toInt()
@@ -79,6 +81,7 @@ fun CreateCustomCard(
     val textTopMargin = with(LocalDensity.current) { 200.dp.toPx() }
     val iconTopMargin = with(LocalDensity.current) { 460.dp.toPx() }
     val numberTextSize = with(LocalDensity.current) { 50.sp.toPx() }
+    val scaleTextSize = with(LocalDensity.current) { 12.sp.toPx() }
 
     circleCoordinateX = with(LocalDensity.current) { 288.dp.toPx() }
     scaleVerticalMargin = with(LocalDensity.current) { 124.dp.toPx() }
@@ -86,6 +89,15 @@ fun CreateCustomCard(
     scaleRightMargin = with(LocalDensity.current) { 10.dp.toPx() }
     radius = with(LocalDensity.current) { 30.dp.toPx() }
     border = with(LocalDensity.current) { 2.dp.toPx() }
+
+    val circlePoint: MutableState<Offset> = remember {
+        mutableStateOf(Offset(0f, 0f))
+    }
+
+    val choosePart: MutableState<Int> = remember {
+        mutableStateOf(4)
+    }
+
     val scalePaint = Paint().apply {
         color = Color.Gray
         strokeWidth = 3f
@@ -149,6 +161,13 @@ fun CreateCustomCard(
         color = android.graphics.Color.WHITE
     }
 
+    val textScalePaint = TextPaint().apply {
+        isAntiAlias = true
+        textSize = scaleTextSize
+        textAlign = android.graphics.Paint.Align.RIGHT
+        color = android.graphics.Color.GRAY
+    }
+
     val sourceBitmap = LocalContext.current.getDrawable(R.drawable.ic_iron_man)
         ?.toBitmap(innerMaskImageWidth, innerMaskImageHeight, Bitmap.Config.ARGB_8888)
     val maskBitmap = Bitmap.createBitmap(imageSize, imageSize, Bitmap.Config.ARGB_8888)
@@ -177,7 +196,7 @@ fun CreateCustomCard(
             scaleHeight = height.value - scaleVerticalMargin
             axisYStep = scaleHeight / (countParts - 1)
             circlePoint.value = calculateCircleCoordinates(choosePart.value)
-            cardPoints = calculateCardListPoints()
+            cardPoints = calculateCardListPoints(circlePoint)
             additionalPoints = additionalCirclePoints()
             scaleListPoints = calculateScalePoints()
             buildCardPath(
@@ -197,11 +216,11 @@ fun CreateCustomCard(
                         if (deltaY >= 0 && y < (circlePoint.value.y - radius) && choosePart.value >= 1) {
                             downY.value = circlePoint.value.y
                             val pos = choosePart.value - 1
-                            updateCoordinates(pos)
+                            updateCoordinates(circlePoint, choosePart, pos, viewModel)
                         } else if (deltaY < 0 && y > (circlePoint.value.y + radius) && choosePart.value <= 8) {
                             downY.value = circlePoint.value.y
                             val pos = choosePart.value + 1
-                            updateCoordinates(pos)
+                            updateCoordinates(circlePoint, choosePart, pos, viewModel)
                         }
                     }
                 }
@@ -227,7 +246,12 @@ fun CreateCustomCard(
                 bitmap = circleIconBitmap,
                 bitmapCenter = Offset(circleIconWidth.toFloat(), circleIconHeight.toFloat())
             )
-            drawScale(canvas = canvas, scalePoints = scaleListPoints, paint = scalePaint)
+            drawScale(
+                canvas = canvas,
+                scalePoints = scaleListPoints,
+                paint = scalePaint,
+                textPaint = textScalePaint,
+            )
             drawCard(
                 canvas = canvas,
                 innerPaint = innerCardPaint,
@@ -240,7 +264,7 @@ fun CreateCustomCard(
             )
             drawBudget(
                 canvas = canvas.nativeCanvas,
-                number = card.number,
+                number = "$"+currentSum.toString(),
                 coordinates = Offset(leftMargin, textTopMargin),
                 paint = textPaint
             )
@@ -254,10 +278,16 @@ fun CreateCustomCard(
     }
 }
 
-private fun updateCoordinates(position: Int) {
+private fun updateCoordinates(
+    circlePoint: MutableState<Offset>,
+    choosePart: MutableState<Int>,
+    position: Int,
+    viewModel: DetailsViewModel
+) {
+    viewModel.updateSum(position)
     choosePart.value = position
     circlePoint.value = calculateCircleCoordinates(position)
-    cardPoints = calculateCardListPoints()
+    cardPoints = calculateCardListPoints(circlePoint)
     additionalPoints = additionalCirclePoints()
     scaleListPoints = calculateScalePoints()
     buildCardPath(cardPath)
@@ -316,9 +346,14 @@ private fun drawCircle(
     }
 }
 
-private fun drawScale(canvas: Canvas, scalePoints: List<PointF>, paint: Paint) {
-    scalePoints.forEach {
-        canvas.drawLine(Offset(it.x, it.y), Offset(it.x - 20f, it.y), paint)
+private fun drawScale(canvas: Canvas, scalePoints: List<PointF>, paint: Paint, textPaint: TextPaint) {
+    val lastIndex = scalePoints.lastIndex
+    scalePoints.forEachIndexed { index, point ->
+        when (index) {
+            0 -> canvas.nativeCanvas.drawText("$"+ minSum, point.x, point.y, textPaint)
+            lastIndex -> canvas.nativeCanvas.drawText("$"+ max.toString(), point.x, point.y, textPaint)
+            else -> canvas.drawLine(Offset(point.x, point.y), Offset(point.x - 20f, point.y), paint)
+        }
     }
 }
 
@@ -385,6 +420,7 @@ private fun additionalCirclePoints(): List<PointF> {
 }
 
 private fun calculateCardListPoints(
+    circlePoint: MutableState<Offset>
 ): List<Offset> {
     val topCirclePoint = Offset(circlePoint.value.x, circlePoint.value.y - axisYStep)
     val bottomCirclePoint = Offset(circlePoint.value.x, circlePoint.value.y + axisYStep)
