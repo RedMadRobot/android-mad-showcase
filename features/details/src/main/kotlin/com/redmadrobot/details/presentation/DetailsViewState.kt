@@ -4,5 +4,5 @@ import com.redmadrobot.base_cards.model.CardViewState
 import com.redmadrobot.core_presentation.model.State
 
 data class DetailsViewState(
-    val card: State<CardViewState>,
+    val card: State<CardViewState>
 )

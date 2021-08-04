@@ -8,13 +8,14 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.Canvas
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.onSizeChanged
@@ -26,10 +27,17 @@ import androidx.core.graphics.drawable.toBitmap
 import com.redmadrobot.base_cards.model.CardViewState
 import com.redmadrobot.details.R
 import com.redmadrobot.details.presentation.model.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
 
+@ExperimentalComposeUiApi
 @SuppressLint("UseCompatLoadingForDrawables")
 @Composable
-fun CardDetailsView(cardState: CardViewState) {
+fun CreateCustomCard(
+    card: CardViewState
+) {
     val imageSize = with(LocalDensity.current) { 150.dp.toPx() }.toInt()
     val cardIconWidth = with(LocalDensity.current) { 70.dp.toPx() }.toInt()
     val cardIconHeight = with(LocalDensity.current) { 40.dp.toPx() }.toInt()
@@ -44,6 +52,7 @@ fun CardDetailsView(cardState: CardViewState) {
     val textTopMargin = with(LocalDensity.current) { 200.dp.toPx() }
     val iconTopMargin = with(LocalDensity.current) { 460.dp.toPx() }
     val numberTextSize = with(LocalDensity.current) { 50.sp.toPx() }
+    val scaleTextSize = with(LocalDensity.current) { 12.sp.toPx() }
 
     circleCoordinateX = with(LocalDensity.current) { 288.dp.toPx() }
     scaleVerticalMargin = with(LocalDensity.current) { 124.dp.toPx() }
@@ -51,32 +60,41 @@ fun CardDetailsView(cardState: CardViewState) {
     scaleRightMargin = with(LocalDensity.current) { 10.dp.toPx() }
     radius = with(LocalDensity.current) { 30.dp.toPx() }
     border = with(LocalDensity.current) { 2.dp.toPx() }
+
+    val circlePoint: MutableState<Offset> = remember {
+        mutableStateOf(Offset(0f, 0f))
+    }
+
+    val choosePart: MutableState<Int> = remember {
+        mutableStateOf(4)
+    }
+
     val scalePaint = Paint().apply {
-        color = androidx.compose.ui.graphics.Color.Gray
+        color = Color.Gray
         strokeWidth = 3f
     }
     val cardShader = LinearGradientShader(
         from = Offset(20f, 0f),
         to = Offset(20f, height.value),
-        colors = cardState.cardBorderColors,
+        colors = card.cardBorderColors,
     )
 
     val innerCardShader = LinearGradientShader(
         from = Offset(20f, border),
         to = Offset(circleCoordinateX, height.value),
-        colors = cardState.cardColors,
+        colors = card.cardColors,
     )
 
     val innerCircleShader = LinearGradientShader(
         from = Offset(circlePoint.value.x - radius + border, circlePoint.value.y - radius + border),
         to = Offset(circlePoint.value.x + radius - border, circlePoint.value.y + radius - border),
-        colors = cardState.cardColors,
+        colors = card.cardColors,
     )
 
     val circleShader = LinearGradientShader(
         from = Offset(circlePoint.value.x - radius, circlePoint.value.y - radius),
         to = Offset(circlePoint.value.x + radius, circlePoint.value.y + radius),
-        colors = cardState.cardBorderColors,
+        colors = card.cardBorderColors,
     )
 
     val cardPaint = Paint().apply {
@@ -114,6 +132,13 @@ fun CardDetailsView(cardState: CardViewState) {
         color = android.graphics.Color.WHITE
     }
 
+    val textScalePaint = TextPaint().apply {
+        isAntiAlias = true
+        textSize = scaleTextSize
+        textAlign = android.graphics.Paint.Align.RIGHT
+        color = android.graphics.Color.GRAY
+    }
+
     val sourceBitmap = LocalContext.current.getDrawable(R.drawable.ic_iron_man)
         ?.toBitmap(innerMaskImageWidth, innerMaskImageHeight, Bitmap.Config.ARGB_8888)
     val maskBitmap = Bitmap.createBitmap(imageSize, imageSize, Bitmap.Config.ARGB_8888)
@@ -128,7 +153,7 @@ fun CardDetailsView(cardState: CardViewState) {
     val iconSourceBitmap = LocalContext.current.getDrawable(R.drawable.ic_master)
         ?.toBitmap(cardIconWidth, cardIconHeight, Bitmap.Config.ARGB_8888)
     typeIconPaint.colorFilter =
-        PorterDuffColorFilter(cardState.iconColor.toArgb(), PorterDuff.Mode.SRC_IN)
+        PorterDuffColorFilter(card.iconColor.toArgb(), PorterDuff.Mode.SRC_IN)
 
     val circleIconBitmap = LocalContext.current.getDrawable(R.drawable.ic_circle_arrow)
         ?.toBitmap(circleIconWidth, circleIconHeight, Bitmap.Config.ARGB_8888)
@@ -142,7 +167,7 @@ fun CardDetailsView(cardState: CardViewState) {
             scaleHeight = height.value - scaleVerticalMargin
             axisYStep = scaleHeight / (countParts - 1)
             circlePoint.value = calculateCircleCoordinates(choosePart.value)
-            cardPoints = calculateCardListPoints()
+            cardPoints = calculateCardListPoints(circlePoint)
             additionalPoints = additionalCirclePoints()
             scaleListPoints = calculateScalePoints()
             buildCardPath(
@@ -162,17 +187,16 @@ fun CardDetailsView(cardState: CardViewState) {
                         if (deltaY >= 0 && y < (circlePoint.value.y - radius) && choosePart.value >= 1) {
                             downY.value = circlePoint.value.y
                             val pos = choosePart.value - 1
-                            updateCoordinates(pos)
+                            updateCoordinates(circlePoint, choosePart, pos)
                         } else if (deltaY < 0 && y > (circlePoint.value.y + radius) && choosePart.value <= 8) {
                             downY.value = circlePoint.value.y
                             val pos = choosePart.value + 1
-                            updateCoordinates(pos)
+                            updateCoordinates(circlePoint, choosePart, pos)
                         }
                     }
                 }
                 MotionEvent.ACTION_UP -> {
                 }
-                else -> false
             }
             true
         }
@@ -192,7 +216,12 @@ fun CardDetailsView(cardState: CardViewState) {
                 bitmap = circleIconBitmap,
                 bitmapCenter = Offset(circleIconWidth.toFloat(), circleIconHeight.toFloat())
             )
-            drawScale(canvas = canvas, scalePoints = scaleListPoints, paint = scalePaint)
+            drawScale(
+                canvas = canvas,
+                scalePoints = scaleListPoints,
+                paint = scalePaint,
+                textPaint = textScalePaint,
+            )
             drawCard(
                 canvas = canvas,
                 innerPaint = innerCardPaint,
@@ -205,7 +234,7 @@ fun CardDetailsView(cardState: CardViewState) {
             )
             drawBudget(
                 canvas = canvas.nativeCanvas,
-                number = cardState.number,
+                number = "$${currentSum(position)}",
                 coordinates = Offset(leftMargin, textTopMargin),
                 paint = textPaint
             )
@@ -219,10 +248,15 @@ fun CardDetailsView(cardState: CardViewState) {
     }
 }
 
-private fun updateCoordinates(position: Int) {
-    choosePart.value = position
-    circlePoint.value = calculateCircleCoordinates(position)
-    cardPoints = calculateCardListPoints()
+private fun updateCoordinates(
+    circlePoint: MutableState<Offset>,
+    choosePart: MutableState<Int>,
+    pos: Int
+) {
+    position = pos
+    choosePart.value = pos
+    circlePoint.value = calculateCircleCoordinates(pos)
+    cardPoints = calculateCardListPoints(circlePoint)
     additionalPoints = additionalCirclePoints()
     scaleListPoints = calculateScalePoints()
     buildCardPath(cardPath)
@@ -281,9 +315,14 @@ private fun drawCircle(
     }
 }
 
-private fun drawScale(canvas: Canvas, scalePoints: List<PointF>, paint: Paint) {
-    scalePoints.forEach {
-        canvas.drawLine(Offset(it.x, it.y), Offset(it.x - 20f, it.y), paint)
+private fun drawScale(canvas: Canvas, scalePoints: List<PointF>, paint: Paint, textPaint: TextPaint) {
+    val lastIndex = scalePoints.lastIndex
+    scalePoints.forEachIndexed { index, point ->
+        when (index) {
+            0 -> canvas.nativeCanvas.drawText("$"+ minSum, point.x, point.y, textPaint)
+            lastIndex -> canvas.nativeCanvas.drawText("$"+ max.toString(), point.x, point.y, textPaint)
+            else -> canvas.drawLine(Offset(point.x, point.y), Offset(point.x - 20f, point.y), paint)
+        }
     }
 }
 
@@ -350,6 +389,7 @@ private fun additionalCirclePoints(): List<PointF> {
 }
 
 private fun calculateCardListPoints(
+    circlePoint: MutableState<Offset>
 ): List<Offset> {
     val topCirclePoint = Offset(circlePoint.value.x, circlePoint.value.y - axisYStep)
     val bottomCirclePoint = Offset(circlePoint.value.x, circlePoint.value.y + axisYStep)

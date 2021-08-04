@@ -9,21 +9,23 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.redmadrobot.core_presentation.model.Content
 import com.redmadrobot.core_presentation.model.Loading
 import com.redmadrobot.core_presentation.model.Stub
-import com.redmadrobot.details.presentation.view.CardDetailsView
+import com.redmadrobot.details.presentation.view.CreateCustomCard
 
 @Composable
+@ExperimentalComposeUiApi
 fun DetailsScreen(viewModel: DetailsViewModel) {
     when (val cardState = viewModel.viewState.collectAsState().value.card) {
         is Loading -> {
             Box(Modifier.fillMaxSize()) { CircularProgressIndicator(Modifier.align(Alignment.Center)) }
         }
         is Content -> {
-            CardDetailsView(cardState = cardState.content)
+            CreateCustomCard(cardState.content)
         }
         is Stub -> {
             Column {

@@ -23,5 +23,7 @@ var scaleHeight = 0f
 var border = 0f
 const val maxSum = 600
 const val minSum = 0
-const val currentSum = maxSum - (maxSum - minSum) / countParts * 5
 const val max = maxSum - (maxSum - minSum) / countParts
+
+var position = 0
+fun currentSum(position: Int) = maxSum - (maxSum - minSum) / countParts * (position + 1)
