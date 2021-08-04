@@ -16,7 +16,6 @@ import com.redmadrobot.home.presentation.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-§§@ExperimentalComposeUiApi
 class MainActivity : AppCompatActivity() {
 
     private val router: AppRouter
