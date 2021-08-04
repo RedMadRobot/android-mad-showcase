@@ -1,17 +1,12 @@
-package com.redmadrobot.home.presentation.model
+package com.redmadrobot.base_cards.model
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 
 enum class CardGradient(val brush: Brush) {
     BLUE(
         Brush.linearGradient(
-            colors = listOf(
-                Color(0xFF91EAE4),
-                Color(0xFF86A8E7),
-                Color(0xFF7F7FD5),
-            ),
+            colors = CardColors.BLUE.colors,
             start = Offset(0f, Float.POSITIVE_INFINITY),
             end = Offset(Float.POSITIVE_INFINITY, 0f)
         )
@@ -19,10 +14,7 @@ enum class CardGradient(val brush: Brush) {
 
     RED(
         Brush.linearGradient(
-            colors = listOf(
-                Color(0xFFA36BCF),
-                Color(0xFFE77557)
-            ),
+            colors = CardColors.RED.colors,
             start = Offset(0f, Float.POSITIVE_INFINITY),
             end = Offset(Float.POSITIVE_INFINITY, 0f)
         )
@@ -30,10 +22,7 @@ enum class CardGradient(val brush: Brush) {
 
     YELLOW(
         Brush.linearGradient(
-            colors = listOf(
-                Color(0xFFF9ED80),
-                Color(0xFFDF832E),
-            ),
+            colors = CardColors.YELLOW.colors,
             start = Offset(0f, Float.POSITIVE_INFINITY),
             end = Offset(Float.POSITIVE_INFINITY, 0f)
         )
@@ -41,10 +30,7 @@ enum class CardGradient(val brush: Brush) {
 
     PINK(
         Brush.linearGradient(
-            colors = listOf(
-                Color(0xFFB0D0FF),
-                Color(0xFF914CE8),
-            ),
+            colors = CardColors.PINK.colors,
             start = Offset(0f, Float.POSITIVE_INFINITY),
             end = Offset(Float.POSITIVE_INFINITY, 0f)
         )
@@ -52,10 +38,7 @@ enum class CardGradient(val brush: Brush) {
 
     GREEN(
         Brush.linearGradient(
-            colors = listOf(
-                Color(0xFF99F2C8),
-                Color(0xFF396063),
-            ),
+            colors = CardColors.GREEN.colors,
             start = Offset(0f, Float.POSITIVE_INFINITY),
             end = Offset(Float.POSITIVE_INFINITY, 0f)
         )

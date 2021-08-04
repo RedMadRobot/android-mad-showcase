@@ -10,7 +10,7 @@ object Screens {
     val Home = Screen(name = "Home")
     val Details = Screen(name = "Details/{$KEY}")
 
-    fun details(id: String? = null): Screen {
+    fun toDetails(id: String? = null): Screen {
         val arguments = listOf(
             navArgument(KEY) { type = NavType.StringType }
         )
