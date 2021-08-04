@@ -1,10 +1,10 @@
 object PresentationVersions {
-    const val APPCOMPAT = "1.3.0-beta01"
+    const val APPCOMPAT = "1.3.1"
 
-    const val COMPOSE = "1.0.0-beta04"
-    const val COMPOSE_ACTIVITY = "1.3.0-alpha07"
-    const val COMPOSE_NAVIGATION = "1.0.0-alpha10"
-    const val COMPOSE_HILT_NAVIGATION = "1.0.0-alpha01"
+    const val COMPOSE = "1.0.0"
+    const val COMPOSE_ACTIVITY = "1.3.0"
+    const val COMPOSE_NAVIGATION = "2.4.0-alpha05"
+    const val COMPOSE_HILT_NAVIGATION = "1.0.0-alpha03"
 }
 
 object PresentationDependency {
@@ -15,7 +15,6 @@ object PresentationDependency {
     const val COMPOSE_COMPILER = "androidx.compose.compiler:compiler:${PresentationVersions.COMPOSE}"
     const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:${PresentationVersions.COMPOSE}"
     const val COMPOSE_FOUNDATION = "androidx.compose.foundation:foundation:${PresentationVersions.COMPOSE}"
-    const val COMPOSE_FOUNDATION_LAYOUT = "androidx.compose.foundation:foundation-layout:${PresentationVersions.COMPOSE}"
     const val COMPOSE_MATERIAL = "androidx.compose.material:material:${PresentationVersions.COMPOSE}"
     const val COMPOSE_ANIMATION = "androidx.compose.animation:animation:${PresentationVersions.COMPOSE}"
 

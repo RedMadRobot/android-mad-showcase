@@ -4,9 +4,11 @@ Showcase is a sample Android project that presents Modern Android Development (M
 
 The goal of the project is to demonstrate modern tech-stack and take a fresh look at the development of Android applications.
 
-# Environment
+# Latest News
 
-This repository uses Jetpack Compose. For the best experience developing with Jetpack Compose, you should download [the latest canary version of Android Studio Preview](https://developer.android.com/studio/preview) . That’s because when you use Android Studio to develop your app with Jetpack Compose, you can benefit from smart editor features, such as New Project templates and the ability to immediately preview your Compose UI.
+**August 04, 2021** Updated to Compose 1.0.0 🎉🎉🎉
+
+Now you can use stable Android Studio Arctic Fox
 
 ## Stack
 

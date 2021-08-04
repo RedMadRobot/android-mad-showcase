@@ -6,7 +6,7 @@ import com.apollographql.apollo.api.Operation
 import com.apollographql.apollo.api.Operation.Variables
 import com.apollographql.apollo.api.Query
 import com.apollographql.apollo.api.Response
-import com.apollographql.apollo.coroutines.toDeferred
+import com.apollographql.apollo.coroutines.await
 import com.redmadrobot.core_network.exception.NetworkExceptionHandler
 import com.redmadrobot.core_network.exception.ServerException
 import com.redmadrobot.core_network.exception.ServerExceptionFactory
@@ -32,7 +32,7 @@ open class ApolloApi(
         return withContext(Dispatchers.IO) {
             val response: Response<T>?
             try {
-                response = apolloClient.mutate(mutation).toDeferred().await()
+                response = apolloClient.mutate(mutation).await()
             } catch (exception: Throwable) {
                 throw networkErrorHandler.handle(exception)
             }
@@ -44,7 +44,7 @@ open class ApolloApi(
         return withContext(Dispatchers.IO) {
             val response: Response<T>?
             try {
-                response = apolloClient.query(query).toDeferred().await()
+                response = apolloClient.query(query).await()
             } catch (exception: Throwable) {
                 throw networkErrorHandler.handle(exception)
             }

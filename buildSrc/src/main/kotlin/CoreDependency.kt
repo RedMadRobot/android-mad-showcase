@@ -1,10 +1,10 @@
 object CoreVersions {
-    const val KOTLIN = "1.4.32"
-    const val COROUTINES = "1.4.2"
+    const val KOTLIN = "1.5.10"
+    const val COROUTINES = "1.5.1"
 
-    const val HILT = "2.35.1"
+    const val HILT = "2.38.1"
 
-    const val APOLLO = "2.5.6"
+    const val APOLLO = "2.5.9"
 }
 
 object CoreDependency {

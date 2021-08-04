@@ -10,6 +10,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
@@ -34,12 +35,14 @@ import com.redmadrobot.details.R
 import com.redmadrobot.details.presentation.model.*
 
 @Composable
+@ExperimentalComposeUiApi
 fun DetailsScreen(viewModel: DetailsViewModel) {
     val viewState = viewModel.viewState.collectAsState().value
     CreateDetailsCard(viewState.cardDetailsState, viewModel ,viewState.currentSum) { viewModel.onRetryClicked() }
 }
 
 @Composable
+@ExperimentalComposeUiApi
 fun CreateDetailsCard(detailsState: State<CardDetailsUi>, viewModel: DetailsViewModel, currentSum: Int, onRetryClickListener: () -> Unit) {
     when (detailsState) {
         is Loading -> {
@@ -61,6 +64,7 @@ fun CreateDetailsCard(detailsState: State<CardDetailsUi>, viewModel: DetailsView
 }
 
 @SuppressLint("UseCompatLoadingForDrawables")
+@ExperimentalComposeUiApi
 @Composable
 fun CreateCustomCard(
     card: CardDetailsUi,

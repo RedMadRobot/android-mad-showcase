@@ -85,7 +85,6 @@ class CommonAndroidConfigPlugin : Plugin<Project> {
         this.tasks.withType<KotlinCompile> {
             kotlinOptions {
                 jvmTarget = JavaVersion.VERSION_1_8.toString()
-                useIR = true
             }
         }
     }
