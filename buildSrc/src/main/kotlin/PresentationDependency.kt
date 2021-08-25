@@ -1,9 +1,9 @@
 object PresentationVersions {
     const val APPCOMPAT = "1.3.1"
 
-    const val COMPOSE = "1.0.0"
-    const val COMPOSE_ACTIVITY = "1.3.0"
-    const val COMPOSE_NAVIGATION = "2.4.0-alpha05"
+    const val COMPOSE = "1.0.1"
+    const val COMPOSE_ACTIVITY = "1.3.1"
+    const val COMPOSE_NAVIGATION = "2.4.0-alpha07"
     const val COMPOSE_HILT_NAVIGATION = "1.0.0-alpha03"
 }
 
