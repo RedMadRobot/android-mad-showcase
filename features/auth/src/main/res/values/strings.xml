@@ -1,0 +1,4 @@
+<resources>
+    <string name="login_title">Please Login</string>
+    <string name="login_button_title">Login</string>
+</resources>
