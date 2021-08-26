@@ -7,7 +7,8 @@ import kotlinx.coroutines.launch
 @Suppress("InstanceOfCheckForException")
 fun CoroutineScope.safeLaunch(
     block: suspend CoroutineScope.() -> Unit,
-    onError: (Throwable) -> Unit
+    onError: (Throwable) -> Unit,
+    onComplete: () -> Unit = {}
 ) {
     launch {
         try {
@@ -16,6 +17,8 @@ fun CoroutineScope.safeLaunch(
             if (exception !is CancellationException) {
                 onError.invoke(exception)
             }
+        } finally {
+            onComplete()
         }
     }
 }
