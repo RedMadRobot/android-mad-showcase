@@ -1,5 +1,5 @@
 object GradlePluginVersions {
-    const val ANDROID_BUILD_TOOLS = "7.0.0"
+    const val ANDROID_BUILD_TOOLS = "7.2.2"
     const val KOTLIN = CoreVersions.KOTLIN
     const val HILT = CoreVersions.HILT
     const val APOLLO = CoreVersions.APOLLO
