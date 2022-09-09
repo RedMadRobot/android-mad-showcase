@@ -1,7 +1,7 @@
 package com.redmadrobot.core_navigation.navigation.screens
 
 import androidx.navigation.NavType
-import androidx.navigation.compose.navArgument
+import androidx.navigation.navArgument
 import com.redmadrobot.core_navigation.navigation.Screen
 
 object Screens {

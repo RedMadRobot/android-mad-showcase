@@ -1,8 +1,8 @@
 object CoreVersions {
-    const val KOTLIN = "1.5.21"
-    const val COROUTINES = "1.5.1"
+    const val KOTLIN = "1.7.10"
+    const val COROUTINES = "1.6.4"
 
-    const val HILT = "2.38.1"
+    const val HILT = "2.42"
 
     const val APOLLO = "2.5.13"
 }

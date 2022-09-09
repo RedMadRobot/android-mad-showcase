@@ -1,6 +1,5 @@
 package com.redmadrobot.mad.plugins
 
-import CoreVersions
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -37,7 +36,7 @@ class CommonAndroidConfigPlugin : Plugin<Project> {
             }
 
             composeOptions {
-                kotlinCompilerExtensionVersion = PresentationVersions.COMPOSE
+                kotlinCompilerExtensionVersion = PresentationVersions.COMPOSE_COMPILER
             }
 
             sourceSets.forEach { it.java.srcDir("src/${it.name}/kotlin") }

@@ -3,15 +3,16 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
     google()
 }
 
 dependencies {
     implementation("com.android.tools.build:gradle:7.2.2")
     implementation("com.android.tools.build:gradle-api:7.2.2")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.5.21")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.7.10")
+    implementation("com.squareup:javapoet:1.13.0") // https://github.com/google/dagger/issues/3068
 }
 
 gradlePlugin {
