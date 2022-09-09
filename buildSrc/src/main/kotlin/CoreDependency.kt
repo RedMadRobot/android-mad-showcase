@@ -4,7 +4,7 @@ object CoreVersions {
 
     const val HILT = "2.38.1"
 
-    const val APOLLO = "2.5.9"
+    const val APOLLO = "2.5.13"
 }
 
 object CoreDependency {
