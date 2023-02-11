@@ -40,7 +40,7 @@ fun AuthScreen(
         Text(
             text = stringResource(id = R.string.login_title),
             color = Color.White,
-            modifier = Modifier.padding(bottom = 12.dp)
+            modifier = Modifier.padding(bottom = 4.dp),
         )
         if (isLoading) {
             CircularProgressIndicator()
@@ -50,4 +50,13 @@ fun AuthScreen(
             }
         }
     }
+}
+
+@Preview(
+    showBackground = true,
+    backgroundColor = 0x434A74
+)
+@Composable
+fun PreviewAuthScreen() {
+    return AuthScreen(isLoading = false) {}
 }
