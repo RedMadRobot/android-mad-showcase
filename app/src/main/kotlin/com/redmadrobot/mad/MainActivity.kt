@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.redmadrobot.auth.presentation.AuthRoute
 import com.redmadrobot.core_navigation.navigation.composableScreen
 import com.redmadrobot.core_navigation.navigation.screens.Routes
-import com.redmadrobot.details.presentation.DetailsScreen
+import com.redmadrobot.details.presentation.DetailsRoute
 import com.redmadrobot.home.presentation.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 HomeScreen(hiltViewModel())
             }
             composableScreen(Routes.Details) {
-                DetailsScreen(hiltViewModel())
+                DetailsRoute()
             }
         }
     }
