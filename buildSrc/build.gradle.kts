@@ -10,8 +10,8 @@ repositories {
 dependencies {
     implementation("com.android.tools.build:gradle:7.4.1")
     implementation("com.android.tools.build:gradle-api:7.4.1")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.7.10")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.8.10")
     implementation("com.squareup:javapoet:1.13.0") // https://github.com/google/dagger/issues/3068
 }
 
