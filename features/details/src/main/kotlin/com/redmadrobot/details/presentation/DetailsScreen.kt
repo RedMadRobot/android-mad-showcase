@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.redmadrobot.base_cards.toCardViewState
-import com.redmadrobot.core_network.CardDetailsQuery
+import com.redmadrobot.core_network.CardDetailsQuery.Card
 import com.redmadrobot.core_presentation.model.Content
 import com.redmadrobot.core_presentation.model.Loading
 import com.redmadrobot.core_presentation.model.Stub
@@ -70,7 +70,7 @@ fun PreviewDetailsScreenWithContent() {
     return DetailsScreen(
         DetailsViewState(
             card = Content(
-                CardDetailsQuery.Card(
+                Card(
                     id = "33", number = "3123", type = "MASTER_CARD", color = "green"
                 ).toCardViewState()
             ),

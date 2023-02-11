@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
         private const val SCROLL_TO_LAST_POSITION_KEY = "SCROLL_TO_LAST_POSITION_KEY"
     }
 
-    private val _viewState = MutableStateFlow(HomeViewState(cards = Loading()))
+    private val _viewState = MutableStateFlow(HomeViewState(state = Loading()))
     val viewState: StateFlow<HomeViewState> = _viewState
 
     // Fix negative arrangement: in initial state the list have a wrong position
@@ -49,14 +49,14 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadCards() {
-        _viewState.update { copy(cards = Loading()) }
+        _viewState.update { copy(state = Loading()) }
         viewModelScope.safeLaunch(
             {
                 val cards = api.query(CardsListQuery()).cards
-                _viewState.update { copy(cards = Content(cards.map(CardsListQuery.Card::toCardViewState))) }
+                _viewState.update { copy(state = Content(cards.map(CardsListQuery.Card::toCardViewState))) }
             },
             onError = { throwable ->
-                _viewState.update { copy(cards = Stub(throwable)) }
+                _viewState.update { copy(state = Stub(throwable)) }
             }
         )
     }

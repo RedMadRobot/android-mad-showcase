@@ -12,6 +12,7 @@ import com.redmadrobot.auth.presentation.AuthRoute
 import com.redmadrobot.core_navigation.navigation.composableScreen
 import com.redmadrobot.core_navigation.navigation.screens.Routes
 import com.redmadrobot.details.presentation.DetailsRoute
+import com.redmadrobot.home.presentation.HomeRoute
 import com.redmadrobot.home.presentation.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 AuthRoute()
             }
             composableScreen(Routes.Home) {
-                HomeScreen(hiltViewModel())
+                HomeRoute()
             }
             composableScreen(Routes.Details) {
                 DetailsRoute()
