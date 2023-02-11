@@ -1,10 +1,14 @@
-# Android MAD Showcase (WORK IN PROGRESS)
+# Android MAD Showcase
 
 Showcase is a sample Android project that presents Modern Android Development (MAD) libraries and practices.
 
 The goal of the project is to demonstrate modern tech-stack and take a fresh look at the development of Android applications.
 
 # Latest News
+
+**February 11, 2023** Updated to Compose 1.3.3 🎉🎉🎉
+
+**September 09, 2022** Updated to Compose 1.2.1 🎉🎉🎉
 
 **August 04, 2021** Updated to Compose 1.0.0 🎉🎉🎉
 
@@ -13,7 +17,7 @@ Now you can use stable Android Studio Arctic Fox
 ## Stack
 
 * Kotlin
-* Compose (WIP)
+* Compose
 * Compose Navigation
 * Coroutines/Flow
 * GraphQl/Appollo
@@ -29,7 +33,7 @@ Now you can use stable Android Studio Arctic Fox
 ```
 MIT License
 
-Copyright (c) 2021 Redmadrobot
+Copyright (c) 2023 Redmadrobot
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
