@@ -9,6 +9,7 @@ dependencies {
     api(PresentationDependency.COMPOSE_ANIMATION)
     api(PresentationDependency.COMPOSE_COMPILER)
     api(PresentationDependency.COMPOSE_TOOLING)
+    api(PresentationDependency.COMPOSE_TOOLING_PREVIEW)
     api(PresentationDependency.COMPOSE_FOUNDATION)
     api(PresentationDependency.COMPOSE_MATERIAL)
     api(PresentationDependency.COMPOSE_ACTIVITY)

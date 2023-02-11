@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.redmadrobot.base_cards.toCardViewState
 import com.redmadrobot.core.extensions.safeLaunch
 import com.redmadrobot.core_navigation.navigation.Router
-import com.redmadrobot.core_navigation.navigation.screens.Screens
+import com.redmadrobot.core_navigation.navigation.screens.Routes
 import com.redmadrobot.core_network.ApolloApi
 import com.redmadrobot.core_network.CardsListQuery
 import com.redmadrobot.core_presentation.extensions.update
@@ -62,6 +62,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onCardClicked(id: String) {
-        router.navigate(Screens.toDetails(id))
+        router.navigate(Routes.toDetails(id))
     }
 }

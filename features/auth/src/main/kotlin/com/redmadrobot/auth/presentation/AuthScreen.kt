@@ -13,12 +13,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.redmadrobot.auth.R
 
 @Composable
-fun AuthScreen(viewModel: AuthViewModel) {
+fun AuthRoute(viewModel: AuthViewModel = hiltViewModel()) {
     val isLoading = viewModel.viewState.collectAsState().value.isLoading
+    AuthScreen(
+        isLoading,
+        viewModel::onLoginClicked
+    )
+}
+
+@Composable
+fun AuthScreen(
+    isLoading: Boolean,
+    onLoginClicked: () -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -32,7 +45,7 @@ fun AuthScreen(viewModel: AuthViewModel) {
         if (isLoading) {
             CircularProgressIndicator()
         } else {
-            Button(onClick = viewModel::onLoginClicked) {
+            Button(onClick = onLoginClicked) {
                 Text(stringResource(id = R.string.login_button_title))
             }
         }

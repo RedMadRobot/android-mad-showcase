@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redmadrobot.core.extensions.safeLaunch
 import com.redmadrobot.core_navigation.navigation.Router
-import com.redmadrobot.core_navigation.navigation.screens.Screens
+import com.redmadrobot.core_navigation.navigation.screens.Routes
 import com.redmadrobot.core_network.ApolloApi
 import com.redmadrobot.core_network.LoginMutation
 import com.redmadrobot.core_presentation.extensions.update
@@ -30,7 +30,7 @@ class AuthViewModel @Inject constructor(
         viewModelScope.safeLaunch(
             {
                 api.mutate(LoginMutation("robot@redmadrobot.com", "Qq!11111"))
-                router.navigate(Screens.Home)
+                router.navigate(Routes.Home)
             },
             onError = { throwable ->
                 Toast.makeText(context, throwable.localizedMessage, Toast.LENGTH_LONG).show()

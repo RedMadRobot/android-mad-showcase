@@ -2,7 +2,7 @@ package com.redmadrobot.mad
 
 import androidx.navigation.NavController
 import com.redmadrobot.core_navigation.navigation.Router
-import com.redmadrobot.core_navigation.navigation.Screen
+import com.redmadrobot.core_navigation.navigation.Route
 
 class AppRouter : Router {
 
@@ -12,7 +12,7 @@ class AppRouter : Router {
         this.navController = navController
     }
 
-    override fun navigate(screen: Screen) {
-        navController.navigate(screen.name)
+    override fun navigate(route: Route) {
+        navController.navigate(route.name)
     }
 }

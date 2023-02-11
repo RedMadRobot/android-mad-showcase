@@ -6,16 +6,16 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
-data class Screen(
+data class Route(
     val name: String,
     val arguments: List<NamedNavArgument> = emptyList(),
 )
 
 fun NavGraphBuilder.composableScreen(
-    screen: Screen,
+    route: Route,
     content: @Composable (NavBackStackEntry) -> Unit
 ): Unit = composable(
-    route = screen.name,
-    arguments = screen.arguments,
+    route = route.name,
+    arguments = route.arguments,
     content = content,
 )

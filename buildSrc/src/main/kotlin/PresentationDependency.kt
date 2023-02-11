@@ -15,6 +15,7 @@ object PresentationDependency {
     const val COMPOSE_UI = "androidx.compose.ui:ui:${PresentationVersions.COMPOSE}"
     const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:${PresentationVersions.COMPOSE}"
     const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:${PresentationVersions.COMPOSE}"
+    const val COMPOSE_TOOLING_PREVIEW = "androidx.compose.ui:ui-tooling-preview:${PresentationVersions.COMPOSE}"
     const val COMPOSE_FOUNDATION = "androidx.compose.foundation:foundation:${PresentationVersions.COMPOSE}"
     const val COMPOSE_MATERIAL = "androidx.compose.material:material:${PresentationVersions.COMPOSE}"
     const val COMPOSE_ANIMATION = "androidx.compose.animation:animation:${PresentationVersions.COMPOSE}"

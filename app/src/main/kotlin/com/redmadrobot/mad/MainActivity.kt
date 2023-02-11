@@ -8,9 +8,9 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.redmadrobot.auth.presentation.AuthScreen
+import com.redmadrobot.auth.presentation.AuthRoute
 import com.redmadrobot.core_navigation.navigation.composableScreen
-import com.redmadrobot.core_navigation.navigation.screens.Screens
+import com.redmadrobot.core_navigation.navigation.screens.Routes
 import com.redmadrobot.details.presentation.DetailsScreen
 import com.redmadrobot.home.presentation.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,14 +33,14 @@ class MainActivity : AppCompatActivity() {
     fun Content() {
         val navController = rememberNavController()
         router.init(navController)
-        NavHost(navController, startDestination = Screens.Auth.name) {
-            composableScreen(Screens.Auth) {
-                AuthScreen(hiltViewModel())
+        NavHost(navController, startDestination = Routes.Auth.name) {
+            composableScreen(Routes.Auth) {
+                AuthRoute()
             }
-            composableScreen(Screens.Home) {
+            composableScreen(Routes.Home) {
                 HomeScreen(hiltViewModel())
             }
-            composableScreen(Screens.Details) {
+            composableScreen(Routes.Details) {
                 DetailsScreen(hiltViewModel())
             }
         }
