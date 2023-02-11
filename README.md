@@ -8,11 +8,9 @@ The goal of the project is to demonstrate modern tech-stack and take a fresh loo
 
 **February 11, 2023** Updated to Compose 1.3.3 🎉🎉🎉
 
-**September 09, 2022** Updated to Compose 1.2.1 🎉🎉🎉
+**September 09, 2022** Updated to Compose 1.2.1
 
-**August 04, 2021** Updated to Compose 1.0.0 🎉🎉🎉
-
-Now you can use stable Android Studio Arctic Fox
+**August 04, 2021** Updated to Compose 1.0.0
 
 ## Stack
 
