@@ -9,6 +9,7 @@ object PresentationVersions {
     const val COMPOSE_ACTIVITY = "1.6.1"
     const val COMPOSE_NAVIGATION = "2.5.3"
     const val COMPOSE_HILT_NAVIGATION = "1.0.0"
+    const val COMPOSE_LIFECYCLE = "2.6.0-beta01"
 }
 
 object PresentationDependency {
@@ -26,4 +27,5 @@ object PresentationDependency {
     const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:${PresentationVersions.COMPOSE_ACTIVITY}"
     const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:${PresentationVersions.COMPOSE_NAVIGATION}"
     const val COMPOSE_HILT_NAVIGATION = "androidx.hilt:hilt-navigation-compose:${PresentationVersions.COMPOSE_HILT_NAVIGATION}"
+    const val COMPOSE_LIFECYCLE = "androidx.lifecycle:lifecycle-runtime-compose:${PresentationVersions.COMPOSE_LIFECYCLE}"
 }

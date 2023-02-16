@@ -13,4 +13,5 @@ dependencies {
     api(PresentationDependency.COMPOSE_FOUNDATION)
     api(PresentationDependency.COMPOSE_MATERIAL)
     api(PresentationDependency.COMPOSE_ACTIVITY)
+    api(PresentationDependency.COMPOSE_LIFECYCLE)
 }

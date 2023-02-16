@@ -5,7 +5,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -13,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.redmadrobot.base_cards.toCardViewState
 import com.redmadrobot.core_network.CardDetailsQuery.Card
 import com.redmadrobot.core_presentation.model.Content
@@ -23,7 +23,7 @@ import com.redmadrobot.details.presentation.view.CreateCustomCard
 @ExperimentalComposeUiApi
 @Composable
 fun DetailsRoute(viewModel: DetailsViewModel = hiltViewModel()) {
-    val state = viewModel.viewState.collectAsState().value
+    val state = viewModel.viewState.collectAsStateWithLifecycle().value
     DetailsScreen(
         state, viewModel::onRetryClicked
     )
