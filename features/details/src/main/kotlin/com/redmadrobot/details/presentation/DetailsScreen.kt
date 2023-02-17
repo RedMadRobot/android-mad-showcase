@@ -35,12 +35,12 @@ private fun DetailsScreen(
     state: DetailsViewState,
     onRetryClicked: () -> Unit,
 ) {
-    when (state.card) {
+    when (state) {
         is Loading -> {
             Box(Modifier.fillMaxSize()) { CircularProgressIndicator(Modifier.align(Alignment.Center)) }
         }
         is Content -> {
-            CreateCustomCard(state.card.content)
+            CreateCustomCard(state.content)
         }
         is Stub -> {
             Column(
@@ -49,7 +49,7 @@ private fun DetailsScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "error: ${state.card.error}",
+                    text = "error: ${state.error}",
                     color = Color.White,
                     modifier = Modifier.padding(bottom = 14.dp)
                 )
@@ -68,12 +68,10 @@ private fun DetailsScreen(
 @Composable
 fun PreviewDetailsScreenWithContent() {
     return DetailsScreen(
-        DetailsViewState(
-            card = Content(
-                Card(
-                    id = "33", number = "3123", type = "MASTER_CARD", color = "green"
-                ).toCardViewState()
-            ),
+        Content(
+            Card(
+                id = "33", number = "3123", type = "MASTER_CARD", color = "green"
+            ).toCardViewState()
         )
     ) {}
 }
@@ -85,9 +83,7 @@ fun PreviewDetailsScreenWithContent() {
 @Composable
 fun PreviewDetailsScreenWithError() {
     return DetailsScreen(
-        DetailsViewState(
-            card = Stub(RuntimeException()),
-        )
+        Stub(RuntimeException())
     ) {}
 }
 
